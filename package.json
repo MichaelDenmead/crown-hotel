@@ -1,0 +1,10 @@
+{
+  "name": "crown-hotel",
+  "version": "1.0.0",
+  "description": "Node.js backend for Crown Hotel",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {}
+}
