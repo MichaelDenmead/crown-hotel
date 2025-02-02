@@ -32,6 +32,9 @@ app.get('/test-db', async (req, res) => {
     }
 });
 
+const roomsRoutes = require('./routes/rooms');
+app.use('/rooms', roomsRoutes);
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
