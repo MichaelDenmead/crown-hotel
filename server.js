@@ -13,28 +13,19 @@ app.use(bodyParser.json());
 // PostgreSQL Connection
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false } // Needed for Render PostgreSQL
+    ssl: { rejectUnauthorized: false }
 });
 
-// Test Route
+// ✅ Test Route
 app.get('/', (req, res) => {
     res.send('Node.js Backend Running');
 });
 
-// Database Test Route
-app.get('/test-db', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT NOW()');
-        res.json({ success: true, time: result.rows[0].now });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ success: false, error: err.message });
-    }
-});
-
+// ✅ Import API Routes
 const roomsRoutes = require('./routes/rooms');
 app.use('/rooms', roomsRoutes);
 
+// ✅ Start Server
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
