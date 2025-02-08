@@ -12,26 +12,26 @@ Try adding your own name & role below to get comfortable with GitHub commits and
 Remember to create a new branch before making changes! Here's a step by step guide:
 
 1. Clone the repo:
-git clone https://github.com/MichaelDenmead/crown-hotel.git
-cd crown-hotel // ensure you are in the correct folder
+git clone https://github.com/MichaelDenmead/crown-hotel.git to your local project folder - try to use VS Code. 
+cd crown-hotel (ensure that you are in correct folder)  
 
-2. Create a new branch for practice:
-git checkout -b practice-yourname
+2. Create a new branch (to practice making changes to GitHub):  
+git checkout -b practice-yourname  
 
-3. Edit this file and add your name.
+3. Edit this README file and add your name (see below).  
 
-4. Stage & commit your changes:
-git add .
-git commit -m "Added [Your Name] to the team section"
+4. Stage & commit your changes:  
+git add .  
+git commit -m "Added [Your Name] to the team section"  
 
-5. Push to GitHub and create a Pull Request
-git push origin practice-yourname
-Get your changes merged into main! 🎉
+5. Push to GitHub and create a Pull Request  
+git push origin practice-yourname  
+Get your changes merged into main! 🎉  
 
-👥 Meet the Team:
-(Each team member should add their name below)
+👥 Meet the Team:  
+(Each team member should add their name below)  
 
-Michael Denmead – Chaos Engineer
-[Your Name] – [Your Role]
-[Another Team Member] – [Their Role]
-[Another Team Member] – [Their Role]
+Michael Denmead – Chaos Engineer  
+[Your Name] – [Your Role]  
+[Another Team Member] – [Their Role]  
+[Another Team Member] – [Their Role]  
