@@ -14,18 +14,18 @@ Remember to create a new branch before making changes! Here's a step by step gui
 1. Clone the repo to your local project folder:  
 git clone https://github.com/MichaelDenmead/crown-hotel.git  
 
-cd crown-hotel (ensure that you are in correct folder)  
+2. cd crown-hotel (ensure that you are in correct folder)  
 
-2. Create a new branch (to practice making changes to GitHub):  
+3. Create a new branch (to practice making changes to GitHub):  
 git checkout -b practice-yourname  
 
-3. Edit this README file and add your name (see below).  
+4. Edit this README file and add your name (see below).  
 
-4. Stage & commit your changes:  
+5. Stage & commit your changes:  
 git add .  
 git commit -m "Added [Your Name] to the team section"  
 
-5. Push to GitHub and create a Pull Request  
+6. Push to GitHub and create a Pull Request  
 git push origin practice-yourname  
 Get your changes merged into main! 🎉  
 
