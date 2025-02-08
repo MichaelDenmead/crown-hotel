@@ -6,8 +6,8 @@ This is the GitHub repository for the Disciples Team as we build out the Crown H
 ✅ Implement a robust backend using Node.js & PostgreSQL
 ✅ Ensure clean, maintainable, and well-documented code
 
-🎯 Practice pushing to and pulling from GitHub
-All team members have the opportunity to make practice making changes by editing this file.
+🎯 Practice pushing to and pulling from GitHub   
+All team members have the opportunity to practice making changes by editing this file.
 Try adding your own name & role below to get comfortable with GitHub commits and pushes.
 Remember to create a new branch before making changes! Here's a step by step guide:
 
