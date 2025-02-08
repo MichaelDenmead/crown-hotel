@@ -1,0 +1,50 @@
+/* styles.css - Main Stylesheet for Crown Hotel Project */
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a:hover {
+    background: #0056b3;
+}
+
+/* Ensure the list does not have default bullets */
+ul {
+    list-style: none; /* Removes default bullets */
+    padding: 0;
+    margin: 0; /* Ensure no default spacing */
+}
+
+/* Ensure list items align properly */
+ul li {
+    margin: 10px 0;
+    display: flex; /* Allows inline alignment */
+    align-items: center; /* Aligns text with emoji */
+}
+
+/* Prevents browser-generated bullets from appearing */
+ul li::marker {
+    content: none;
+}
