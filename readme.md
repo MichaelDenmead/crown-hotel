@@ -11,8 +11,9 @@ All team members have the opportunity to make practice making changes by editing
 Try adding your own name & role below to get comfortable with GitHub commits and pushes.
 Remember to create a new branch before making changes! Here's a step by step guide:
 
-1. Clone the repo:
-git clone https://github.com/MichaelDenmead/crown-hotel.git to your local project folder - try to use VS Code. 
+1. Clone the repo to your local project folder:  
+git clone https://github.com/MichaelDenmead/crown-hotel.git  
+
 cd crown-hotel (ensure that you are in correct folder)  
 
 2. Create a new branch (to practice making changes to GitHub):  
