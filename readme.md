@@ -33,6 +33,6 @@ Get your changes merged into main! 🎉
 (Each team member should add their name below)  
 
 Michael Denmead – Chaos Engineer  
-[Your Name] – [Your Role]  
+Allen Abraham – CFO  
 [Another Team Member] – [Their Role]  
 [Another Team Member] – [Their Role]  
