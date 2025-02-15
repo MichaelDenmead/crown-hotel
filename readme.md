@@ -21,6 +21,6 @@ PostgreSQL – Database management
 (Each team member should add their name below)  
 
 Michael Denmead – Chaos Engineer  
-[Your Name] – [Your Role]  
-[Another Team Member] – [Their Role]  
+Allen Abraham – CFO  
+Kris Kilsby – Full Stack Developer  
 [Another Team Member] – [Their Role]  
