@@ -34,5 +34,5 @@ Get your changes merged into main! 🎉
 
 Michael Denmead – Chaos Engineer  
 Allen Abraham – CFO  
-[Another Team Member] – [Their Role]  
+Kris Kilsby – Full Stack Developer  
 [Another Team Member] – [Their Role]  
