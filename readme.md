@@ -23,4 +23,4 @@ PostgreSQL – Database management
 Michael Denmead – Chaos Engineer  
 Allen Abraham – CFO  
 Kris Kilsby – Full Stack Developer  
-[Another Team Member] – [Their Role]  
+Yao Xiao - International Affairs  
