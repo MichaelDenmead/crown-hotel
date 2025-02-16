@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head></head> <!-- Head will be replaced dynamically -->
-
+<head>
+    <title>Book Your Stay</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
 <body>
-    <div id="navbar"></div> <!-- Navbar loads dynamically -->
+    <div id="navbar"></div>
 
     <div class="container mt-5 text-center">
         <h1>Book Your Stay</h1>
         <p class="lead">Secure your perfect room at Crown Hotel.</p>
 
-        <form>
+        <form id="bookingForm">
+            <div class="mb-3">
+                <label for="customerName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="customerName" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
             <div class="mb-3">
                 <label for="checkin" class="form-label">Check-in Date</label>
                 <input type="date" class="form-control" id="checkin" required>
@@ -19,6 +29,14 @@
                 <input type="date" class="form-control" id="checkout" required>
             </div>
             <div class="mb-3">
+                <label for="roomType" class="form-label">Room Type</label>
+                <select class="form-control" id="roomType" required>
+                    <option value="double">Double</option>
+                    <option value="twin">Twin</option>
+                    <option value="superior">Superior</option>
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="guests" class="form-label">Guests</label>
                 <input type="number" class="form-control" id="guests" min="1" required>
             </div>
@@ -26,8 +44,45 @@
         </form>
     </div>
 
-    <div id="footer"></div> <!-- Footer loads dynamically -->
+    <div id="footer"></div>
 
-    <script src="/js/components.js"></script> <!-- Ensure this is at the end -->
+    <script src="/js/components.js"></script>
+    <script>
+        // Ensure the script runs only after the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('bookingForm').onsubmit = async function(event) {
+                event.preventDefault();
+
+                // Gather booking form data
+                const bookingData = {
+                    customerName: document.getElementById('customerName').value,
+                    email: document.getElementById('email').value,
+                    checkInDate: document.getElementById('checkin').value,
+                    checkOutDate: document.getElementById('checkout').value,
+                    roomType: document.getElementById('roomType').value,
+                    guests: document.getElementById('guests').value
+                };
+
+                try {
+                    const response = await fetch('/api/book', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(bookingData)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        window.location.href = `/confirmation.html?bookingRef=${result.bookingRef}`;
+                    } else {
+                        alert(result.message);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Something went wrong. Please try again.');
+                }
+            };
+        });
+    </script>
 </body>
 </html>
