@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head> <!-- Head will be replaced dynamically -->
+
+<body>
+    <div id="navbar"></div> <!-- Navbar loads dynamically -->
+
+    <div class="container mt-5 text-center">
+        <h1>Book Your Stay</h1>
+        <p class="lead">Secure your perfect room at Crown Hotel.</p>
+
+        <form>
+            <div class="mb-3">
+                <label for="checkin" class="form-label">Check-in Date</label>
+                <input type="date" class="form-control" id="checkin" required>
+            </div>
+            <div class="mb-3">
+                <label for="checkout" class="form-label">Check-out Date</label>
+                <input type="date" class="form-control" id="checkout" required>
+            </div>
+            <div class="mb-3">
+                <label for="guests" class="form-label">Guests</label>
+                <input type="number" class="form-control" id="guests" min="1" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Confirm Booking</button>
+        </form>
+    </div>
+
+    <div id="footer"></div> <!-- Footer loads dynamically -->
+
+    <script src="/js/components.js"></script> <!-- Ensure this is at the end -->
+</body>
+</html>
