@@ -5,6 +5,15 @@ const pool = require('./db'); // Import PostgreSQL connection
 require('dotenv').config();
 
 const app = express();
+
+app.use('/staff', express.static(__dirname + '/staff')); // Serve staff folder
+app.use('/staff/css', express.static(path.join(__dirname, 'staff/css'))); // Serve staff CSS folder
+
+// Route for staff reports page
+app.get('/staff/reports', (req, res) => 
+    res.sendFile(path.join(__dirname, 'staff', 'reports.html'))
+);
+
 const PORT = 3000;
 
 // Middleware to parse JSON requests
