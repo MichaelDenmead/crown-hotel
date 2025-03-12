@@ -1,0 +1,41 @@
+body {
+    background-color: #f8f9fa;
+}
+/* ✅ Change Bootstrap primary button color */
+.btn-primary {
+    background-color: #A4436B !important;
+    border-color: #A4436B !important;
+}
+
+/* ✅ Change hover & focus states */
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #8C375D !important; /* Slightly darker for hover */
+    border-color: #8C375D !important;
+}
+
+✅ Change outline button variant
+.btn-outline-primary {
+    color: #A4436B !important;
+    border-color: #A4436B !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    background-color: #A4436B !important;
+    color: white !important;
+}
+
+
+/* Navbar Links - Full White with Theme Hover Effect */
+.navbar-nav .nav-link {
+    color: #ffffff !important; /* Ensure full white text */
+    font-weight: bold;
+    text-transform: uppercase; /* Make links uppercase */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #A4436B !important; /* Theme color on hover */
+}
