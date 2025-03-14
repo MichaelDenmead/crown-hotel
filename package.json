@@ -14,5 +14,13 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "pg": "^8.13.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelDenmead/crown-hotel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MichaelDenmead/crown-hotel/issues"
+  },
+  "homepage": "https://github.com/MichaelDenmead/crown-hotel#readme"
 }
