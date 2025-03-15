@@ -1,6 +1,6 @@
-body {
-    background-color: #f8f9fa;
-}
+* {
+    font-family: 'Roboto', serif;}
+
 /* ✅ Change Bootstrap primary button color */
 .btn-primary {
     background-color: #A4436B !important;
@@ -29,13 +29,45 @@ body {
 }
 
 
+/* Set Crown Hotel text to match logo's green */
+.navbar-brand {
+    color: #516054 !important; 
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.navbar-brand:hover {
+    color: #253026 !important; /* Darker color on hover */
+}
+
 /* Navbar Links - Full White with Theme Hover Effect */
 .navbar-nav .nav-link {
-    color: #ffffff !important; /* Ensure full white text */
+    color: #516054 !important; /* Change Nav Links to Green*/
     font-weight: bold;
     text-transform: uppercase; /* Make links uppercase */
 }
 
 .navbar-nav .nav-link:hover {
-    color: #A4436B !important; /* Theme color on hover */
+    color: #253026 !important; /* Darker color on hover */
+}
+
+.navbar .book-now {
+    background-color: #A4436B; /* Pink background */
+    color: white !important;   /* Ensure text is readable */
+    border-radius: 10px;        /* Rounded corners */
+}
+
+.navbar .book-now:hover {
+    background-color: #8C375D; /* Darker pink on hover */
+    color: white !important;
+}
+
+
+#about,
+#services h2 {
+    color: #516054;
+}
+
+#services h3 {
+    color: #b7594a;
 }

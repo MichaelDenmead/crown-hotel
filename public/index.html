@@ -2,16 +2,85 @@
 <html lang="en">
 <head></head> <!-- Head will be replaced dynamically -->
 <body>
-    <div id="navbar"></div> <!-- Navbar loads dynamically -->
+    <!-- Navbar loads dynamically -->
+    <div id="navbar"></div>
 
-    <div class="container mt-5 text-center">
-        <h1>Welcome to Crown Hotel</h1>
-        <p class="lead">Luxury and comfort in the heart of Norwich.</p>
-        <a href="/booking" class="btn btn-primary">Book Your Stay</a>
-    </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero d-flex align-items-center justify-content-center text-white text-center" 
+        style="background: url('/resources/hero.jpg') center/cover no-repeat; height: 80vh;">
+        <!-- <div class="container">
+            <h1 class="display-4 fw-bold">Welcome to The Crown Hotel</h1>
+            <p class="lead">Where your new story begins</p>
+            <a href="/booking" class="btn btn-primary btn-lg mt-3 fw-bold">Book Your Stay</a>
+        </div> -->
+    </section>
 
-    <div id="footer"></div> <!-- Footer loads dynamically -->
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">About Us</h2>
+            <p class="text-center">The Crown Hotel is an independent paradise of luxury and style, conveniently located near the hospital and research park. With 32 double or twin rooms, in both standard and superior options—we can adapt your stay to your unique needs. Aside from our relaxing rooms, you'll discover a well-equipped gym, a friendly bar, and a restaurant serving outstanding, locally produced food. Our three versatile event rooms provide an ideal location for meetings and special occasions. In the heart of the City of Stories, every guest who stays with us shapes Norwich's unique story. Whether you're here for work or pleasure, let The Crown Hotel be your next chapter of luxury and relaxation.</p>
+        </div>
+    </section>
 
+        <!-- Services Section -->
+    <section id="services" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Our Services</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm">
+                        <div class="ratio ratio-4x3"> <!-- Ensures uniform aspect ratio -->
+                            <img src="/resources/gym.jpg" class="card-img-top object-fit-cover" alt="Gym">
+                        </div>
+                        <div class="card-body text-center">
+                            <h3 class="h5">Gym</h3>
+                            <p>A fully equipped fitness space to meet all your goals</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm">
+                        <div class="ratio ratio-4x3">
+                            <img src="/resources/bar.jpg" class="card-img-top object-fit-cover" alt="Bar">
+                        </div>
+                        <div class="card-body text-center">
+                            <h3 class="h5">Bar</h3>
+                            <p>Premium drinks hand crafted by our expert mixologists</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm">
+                        <div class="ratio ratio-4x3">
+                            <img src="/resources/restaurant.jpg" class="card-img-top object-fit-cover" alt="Restaurant">
+                        </div>
+                        <div class="card-body text-center">
+                            <h3 class="h5">Restaurant</h3>
+                            <p>Delicious meals from locally sourced and fresh ingredients</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm">
+                        <div class="ratio ratio-4x3">
+                            <img src="/resources/conference.jpg" class="card-img-top object-fit-cover" alt="Event Rooms">
+                        </div>
+                        <div class="card-body text-center">
+                            <h3 class="h5">Event Rooms</h3>
+                            <p>Spacious rooms for holding all special occasions and events</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer loads dynamically -->
+    <div id="footer"></div>
+
+    <!-- Scripts -->
     <script src="/js/components.js"></script> <!-- Ensure this is at the end -->
 </body>
 </html>
