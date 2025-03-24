@@ -5,20 +5,10 @@
 <body>
     <div id="navbar"></div> <!-- Navbar loads dynamically -->
 
-    <div class="container mt-5 text-center">
-        <h1>Our Facilities</h1>
-        <p class="lead">Enjoy top-notch amenities during your stay.</p>
-        <!-- <ul class="list-group">
-            <li class="list-group-item">Luxury Spa & Wellness Centre</li>
-            <li class="list-group-item">State-of-the-art Gym</li>
-            <li class="list-group-item">Infinity Pool with Bar</li>
-            <li class="list-group-item">Fine Dining & Rooftop Restaurant</li>
-            <li class="list-group-item">24/7 Room Service</li>
-        </ul> -->
-    </div>
-
-    <section id="facilities" class="py-5 bg-light">
+    <section id="facilities" class="py-5"> <!--original was: class="py-5 bg-light" -->
         <div class="container">
+            <h1 class="text-center mb-4">Our Facilities</h1>
+            <p class="text-center lead">Enjoy top-notch amenities during your stay.</p>
             <!-- <h2 class="text-center mb-4">Our Facilities</h2> -->
             <div class="row g-4">
                 <!-- Luxury Spa & Wellness Centre -->
@@ -27,15 +17,30 @@
                         <!-- Bootstrap Carousel code -->
                         <div id="spaCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">    
-                                    <img src="resources/spa_01.jpg" class="d-block w-100 object-fit-cover" alt="Luxury Spa">
+                                <!-- First Carousel Item -->
+                                <div class="carousel-item active">  
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_spa_bath_women_sml.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_spa_bath_women_lrg.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_spa_bath_women_lrg.jpg" class="d-block w-100 object-fit-cover" alt="Luxury Spa" width="630" height="420">
+                                    </picture>
                                 </div>
-                                <div class="carousel-item">    
-                                    <img src="resources/spa_02.jpg" class="d-block w-100 object-fit-cover" alt="Spa treatments">
+                                <!-- Second Carousel Item -->
+                                <div class="carousel-item">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_spa_towel_sml.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_spa_towel_lrg.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_spa_towel_lrg.jpg" class="d-block w-100 object-fit-cover" alt="Spa Treatments" loading="lazy" width="630" height="420">
+                                    </picture>
                                 </div>
-                                <div class="carousel-item">    
-                                    <img src="resources/spa_03.jpg" class="d-block w-100 object-fit-cover" alt="Relaxing Massage">
-                                </div> 
+                                <!-- Third Carousel Item -->
+                                <div class="carousel-item">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_spa_massage_women_sml.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_spa_massage_women_lrg.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_spa_massage_women_lrg.jpg" class="d-block w-100 object-fit-cover" alt="Relaxing Massage" loading="lazy" width="630" height="420">
+                                    </picture>
+                                </div>
                             </div>
                             <!-- Bootstrap Button code -->
                             <button class="carousel-control-prev" type="button" data-bs-target="#spaCarousel" data-bs-slide="prev" aria-label="Previous">
@@ -49,7 +54,7 @@
                         </div>
                         <!-- Text to add at bottom of card -->
                         <div class="card-body text-center">
-                            <h3 class="h5">Luxury Spa</h3>
+                            <h2 class="h5">Luxury Spa</h2>
                             <p>From peaceful spa baths to expert massages and nourishing facials, experience pure relaxation in our world-class wellness retreat.</p>
                         </div>    
                     </div>    
@@ -61,111 +66,194 @@
                         <!-- Bootstrap Carousel code -->
                         <div id="gymCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">    
-                                    <img src="resources/gym_01.jpg" class="d-block w-100 object-fit-cover" alt="Luxury Gym">
+                                <!-- First Carousel Item -->
+                                <div class="carousel-item active">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_gym_sml.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_gym_lrg.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_gym_lrg.jpg" class="d-block w-100 object-fit-cover" alt="Luxury Gym" width="630" height="420">
+                                    </picture>
                                 </div>
-                                <div class="carousel-item">    
-                                    <img src="resources/gym_02.jpg" class="d-block w-100 object-fit-cover" alt="Running">
+
+                                <!-- Second Carousel Item -->
+                                <div class="carousel-item">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_gym_running_women_sml.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_gym_running_women_lrg.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_gym_running_women_lrg.jpg" class="d-block w-100 object-fit-cover" alt="Running" loading="lazy" width="630" height="420">
+                                    </picture>
                                 </div>
-                                <div class="carousel-item">    
-                                    <img src="resources/gym_03.jpg" class="d-block w-100 object-fit-cover" alt="weights">
-                                </div> 
+
+                                <!-- Third Carousel Item -->
+                                <div class="carousel-item">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_gym_weights_man_sml.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_gym_weights_man_lrg.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_gym_weights_man_lrg.jpg" class="d-block w-100 object-fit-cover" alt="Weights" loading="lazy" width="630" height="420">
+                                    </picture>
+                                </div>
                             </div>
+
+                            <!-- Bootstrap Button Controls -->
                             <button class="carousel-control-prev" type="button" data-bs-target="#gymCarousel" data-bs-slide="prev" aria-label="Previous">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <!-- Bootstrap Button code -->
                             <button class="carousel-control-next" type="button" data-bs-target="#gymCarousel" data-bs-slide="next" aria-label="Next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                         <!-- Text to add at bottom of card -->
+
+                        <!-- Text Section Below the Card -->
                         <div class="card-body text-center">
-                            <h3 class="h5">Premier Fitness Experience</h3>
+                            <h2 class="h5">Premier Fitness Experience</h2>
                             <p>Push your limits in our fully equipped gym, designed to elevate your workout experience with cutting-edge equipment and a serene, inspiring ambiance.</p>
-                        </div>    
-                    </div>    
-                </div>
-                
-
-
-
-               
-                <!-- Infinity Pool with Bar -->
-                <div class="col-md-6">
-                    <div class="card border-0 shadow-sm">
-                        <div class="ratio ratio-4x3">
-                            <img src="resources/gym.jpg" class="card-img-top object-fit-cover" alt="Infinity Pool with Bar">
-                        </div>
-                        <div class="card-body text-center">
-                            <h3 class="h5">Infinity Pool</h3>
-                            <p>Swim and unwind with a cocktail at our stunning poolside bar.</p>
                         </div>
                     </div>
                 </div>
-                <!-- Fine Dining & Rooftop Restaurant -->
+
+                <!-- Country Pool with Cafe -->
                 <div class="col-md-6">
                     <div class="card border-0 shadow-sm">
-                        <div class="ratio ratio-4x3">
-                            <img src="resources/restaurant.jpg" class="card-img-top object-fit-cover" alt="Fine Dining & Rooftop Restaurant">
+                        <!-- Bootstrap Carousel code -->
+                        <div id="poolCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                            <div class="carousel-inner">
+                                <!-- First Carousel Item -->
+                                <div class="carousel-item active">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_luxury_pool_sml1.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_luxury_pool_lrg1.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_luxury_pool_lrg1.jpg" class="d-block w-100 object-fit-cover" alt="Pool-side" loading="lazy" width="630" height="420">
+                                    </picture>
+                                </div>
+
+                                <!-- Second Carousel Item -->
+                                <div class="carousel-item">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_pool_swimmer_sml.webp" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_pool_swimmer_lrg.webp" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_pool_swimmer_lrg.webp" class="d-block w-100 object-fit-cover" alt="Swimming" loading="lazy" width="630" height="420">
+                                    </picture>
+                                </div>
+
+                                <!-- Third Carousel Item -->
+                                <div class="carousel-item">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_luxury_pool_sml2.webp" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_luxury_pool_lrg2.webp" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_luxury_pool_lrg2.webp" class="d-block w-100 object-fit-cover" alt="Pool at night" loading="lazy" width="630" height="420">
+                                    </picture>
+                                </div>
+                            </div>
+
+                            <!-- Bootstrap Button Controls -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#poolCarousel" data-bs-slide="prev" aria-label="Previous">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#poolCarousel" data-bs-slide="next" aria-label="Next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
+
+                        <!-- Text Section Below the Card -->
                         <div class="card-body text-center">
-                            <h3 class="h5">Rooftop Dining</h3>
-                            <p>Enjoy gourmet meals with breathtaking city views.</p>
+                            <h2 class="h5">Dive into Luxury</h2>
+                            <p>A serene oasis where countryside charm meets elegant relaxation. Unwind by our heated pool and let the peaceful views soothe your senses.</p>
                         </div>
                     </div>
                 </div>
+                <!-- Fine Dining & Bar -->
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm">
+                        <!-- Bootstrap Carousel -->
+                        <div id="dineCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                            <div class="carousel-inner">
+                                <!-- First Carousel Item -->
+                                <div class="carousel-item active">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_luxury_restaurant_sml.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_luxury_restaurant_lrg.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_luxury_restaurant_lrg.jpg" class="d-block w-100 object-fit-cover" alt="Luxury Dining" loading="lazy" width="630" height="420">
+                                    </picture>
+                                </div>
+
+                                <!-- Second Carousel Item -->
+                                <div class="carousel-item">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_luxury_afternoon_tea_sml.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_luxury_afternoon_tea_lrg.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_luxury_afternoon_tea_lrg.jpg" class="d-block w-100 object-fit-cover" alt="Afternoon Tea" loading="lazy" width="630" height="420">
+                                    </picture>
+                                </div>
+
+                                <!-- Third Carousel Item -->
+                                <div class="carousel-item">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_luxury_restaurant_sml2.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_luxury_restaurant_lrg2.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_luxury_restaurant_lrg2.jpg" class="d-block w-100 object-fit-cover" alt="Elegant Restaurant Ambiance" loading="lazy" width="630" height="420">
+                                    </picture>
+                                </div>
+
+                                <!-- Fourth Carousel Item -->
+                                <div class="carousel-item">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_luxury_bites_cocktails_sml.jpg" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_luxury_bites_cocktails_lrg.jpg" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_luxury_bites_cocktails_lrg.jpg" class="d-block w-100 object-fit-cover" alt="Cocktails and Light Bites" loading="lazy" width="630" height="420">
+                                    </picture>
+                                </div>
+
+                                <!-- Fifth Carousel Item -->
+                                <div class="carousel-item">
+                                    <picture>
+                                        <source srcset="resources/smallscreen/facilities/hotel_luxury_restaurant_bar_sml.webp" media="(max-width: 992px)">
+                                        <source srcset="resources/largescreen/facilities/hotel_luxury_restaurant__bar_lrg.webp" media="(min-width: 993px)">
+                                        <img src="resources/largescreen/facilities/hotel_luxury_restaurant__bar_lrg.webp" class="d-block w-100 object-fit-cover" alt="Luxury Bar" loading="lazy" width="630" height="420">
+                                    </picture>
+                                </div>
+                            </div>
+
+                            <!-- Carousel Control Buttons -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#dineCarousel" data-bs-slide="prev" aria-label="Previous">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#dineCarousel" data-bs-slide="next" aria-label="Next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+
+                        <!-- Text at Bottom of Card -->
+                        <div class="card-body text-center">
+                            <h2 class="h5">Savor the Exceptional</h2>
+                            <p>Experience refined dining in a charming country setting. From exquisite fine dining to indulgent afternoon tea and crafted cocktails, every moment is a taste of luxury.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 24/7 Room Service -->
                 <div class="d-flex justify-content-center">
                     <div class="col-md-6">
                         <div class="card border-0 shadow-sm">
                             <div class="ratio ratio-4x3">
-                                <img src="resources/restaurant.jpg" class="card-img-top object-fit-cover" alt="24/7 Room Service">
+                                <picture>
+                                    <source srcset="resources/smallscreen/facilities/room_service_sml.webp" media="(max-width: 992px)">
+                                    <source srcset="resources/largescreen/facilities/room_service_lrg.webp" media="(min-width: 993px)">
+                                    <img src="resources/largescreen/facilities/room_service_lrg.webp" class="card-img-top object-fit-cover" alt="24/7 Room Service" loading="lazy">
+                                </picture>
                             </div>
                             <div class="card-body text-center">
-                                <h3 class="h5">24/7 Room Service</h3>
-                                <p>Delicious meals and snacks delivered to your door anytime.</p>
+                                <h2 class="h5">24/7 Room Service</h2>
+                                <p>Savor delicious meals and snacks, freshly prepared and delivered to your door anytime, day or night.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Example Add Card Type Description -->
-                <div class="col-md-6">
-                    <div class="card border-0 shadow-sm">
-                        <!-- Bootstrap Carousel code -->
-                        <div id="exampleCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">    
-                                    <img src="resources/example_01.jpg" class="d-block w-100 object-fit-cover" alt="Luxury Spa">
-                                </div>
-                                <div class="carousel-item">    
-                                    <img src="resources/example_02.jpg" class="d-block w-100 object-fit-cover" alt="Spa treatments">
-                                </div>
-                                <div class="carousel-item">    
-                                    <img src="resources/example_03.jpg" class="d-block w-100 object-fit-cover" alt="Relaxing Massage">
-                                </div> 
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#exampleCarousel" data-bs-slide="prev" aria-label="Previous">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <!-- Bootstrap Button code -->
-                            <button class="carousel-control-next" type="button" data-bs-target="#exampleCarousel" data-bs-slide="next" aria-label="Next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                         <!-- Text to add at bottom of card -->
-                        <div class="card-body text-center">
-                            <h3 class="h5">Title Text</h3>
-                            <p>Paragraph of information about the card. Need to fill up enough text to keep it to two lines and similar to each other.</p>
-                        </div>    
-                    </div>    
-                </div>
-
             </div>
         </div>
     </section>
@@ -174,7 +262,7 @@
     
     <!-- Ensure the below is at the end of body -->
     <script src="/js/components.js"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
