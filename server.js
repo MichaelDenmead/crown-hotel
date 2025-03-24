@@ -15,9 +15,9 @@ app.use(express.json());
 // -------------------------------
 
 // 📌 Public Assets (CSS, JS, Components)
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/css', express.static(path.join(__dirname, 'public/css')));
-app.use('/js', express.static(path.join(__dirname, 'public/js')));
+app.use(express.static(path.join(__dirname, 'public'))); // KK THIS ALREADY MAPS ENTIRE PUBLIC FOLDER TO ROOT
+app.use('/css', express.static(path.join(__dirname, 'public/css'))); //KK TEMP REMOVE TEST - MAY NOT NEED
+app.use('/js', express.static(path.join(__dirname, 'public/js'))); //KK TEMP REMOVE TEST - MAY NOT NEED
 app.use('/components', express.static(path.join(__dirname, 'public/components')));
 
 // 📌 Staff Area (Static Files)
@@ -35,6 +35,7 @@ app.get('/facilities', (req, res) => res.sendFile(path.join(__dirname, 'public',
 app.get('/booking', (req, res) => res.sendFile(path.join(__dirname, 'public', 'booking.html')));
 app.get('/confirmation', (req, res) => res.sendFile(path.join(__dirname, 'public', 'confirmation.html')));
 app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'public', 'contact.html')));
+app.get('/outAndAbout', (req, res) => res.sendFile(path.join(__dirname, 'public', 'outAndAbout.html')));
 
 // 📌 Staff Pages
 app.get('/staff/reports', (req, res) => res.sendFile(path.join(__dirname, 'staff', 'reports.html')));
