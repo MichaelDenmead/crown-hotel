@@ -3,6 +3,31 @@
     font-family: 'Roboto', serif;
 }
 
+/* Index.html page Hero image responsive size control */
+#home {
+    background: url('/resources/hero/hero_small.webp') center/cover no-repeat;
+    
+}
+
+@media (min-width: 768px) {
+    #home {
+        background-image: url('/resources/hero/hero_medium.webp');
+    }
+}
+
+@media (min-width: 1200px) {
+    #home {
+        background-image: url('/resources/hero/hero_large.webp');
+    }
+}
+
+@media (min-width: 1600px) {
+    #home {
+        background-image: url('/resources/hero/hero_ultrasize.webp');
+    }
+}
+
+
 /* ✅ Buttons */
 .btn-primary {
     background-color: #A4436B !important;
