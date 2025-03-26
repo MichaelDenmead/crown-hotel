@@ -3,9 +3,6 @@
     font-family: 'Roboto', serif;
 }
 
-<<<<<<< Updated upstream
-/* ✅ Buttons */
-=======
 /* Index.html page Hero image responsive size control */
 #home {
     background: url('/resources/hero/hero_small.webp') center/cover no-repeat;
@@ -32,7 +29,6 @@
 
 
 /* ✅ Buttons - disabled temporarily (Allen)
->>>>>>> Stashed changes
 .btn-primary {
     background-color: #A4436B !important;
     border-color: #A4436B !important;
