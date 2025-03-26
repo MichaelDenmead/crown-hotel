@@ -3,7 +3,36 @@
     font-family: 'Roboto', serif;
 }
 
+<<<<<<< Updated upstream
 /* ✅ Buttons */
+=======
+/* Index.html page Hero image responsive size control */
+#home {
+    background: url('/resources/hero/hero_small.webp') center/cover no-repeat;
+    
+}
+
+@media (min-width: 768px) {
+    #home {
+        background-image: url('/resources/hero/hero_medium.webp');
+    }
+}
+
+@media (min-width: 1200px) {
+    #home {
+        background-image: url('/resources/hero/hero_large.webp');
+    }
+}
+
+@media (min-width: 1600px) {
+    #home {
+        background-image: url('/resources/hero/hero_ultrasize.webp');
+    }
+}
+
+
+/* ✅ Buttons - disabled temporarily (Allen)
+>>>>>>> Stashed changes
 .btn-primary {
     background-color: #A4436B !important;
     border-color: #A4436B !important;
@@ -26,7 +55,7 @@
 .btn-outline-primary:active {
     background-color: #A4436B !important;
     color: white !important;
-}
+} */
 
 /* ✅ Navbar Brand */
 .navbar-brand {
@@ -80,6 +109,8 @@
 /* ✅ Book Now Button */
 .navbar .book-now {
     background-color: #A4436B;
+    padding: 0.25rem;    /* smaller height */
+    margin-top: 0.25rem; /* aligns it vertically */
     color: white !important;
     border-radius: 10px;
 }
@@ -109,4 +140,67 @@
 
 #services h3 {
     color: #b7594a;
+}
+
+/* ✅ Booking Form */
+#booking .container {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#booking h1 {
+    font-weight: 700;
+    color: #617697;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#bookingForm .form-label {
+    font-weight: bold;
+}
+
+#bookingForm button[type='submit'] {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #617697;
+    border-color: #617697;
+    color: white;
+}
+
+#bookingForm button[type='submit']:hover {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #4a5a72;
+    border-color: #4a5a72;
+}
+
+/* ✅ Payment Form */
+#payment h2 {
+    font-weight: 700;
+    color: #A4436B;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#paymentForm button[type='submit'] {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    color: white;
+    background-color: #A4436B;
+    border-color: #A4436B;
+}
+
+#paymentForm button[type='submit']:hover {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #8C375D;
+    border-color: #8C375D;
 }

@@ -1,147 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Book Your Stay | Crown Hotel</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
+<head></head>
 <body>
-    <div id="navbar"></div>
+  <div id="navbar"></div>
 
-    <div class="container mt-5">
-        <!-- Booking Introduction Section -->
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-8">
-                <h1 class="mb-3">Book Your Stay</h1>
-                <p class="lead">Experience luxury and comfort at <strong>Crown Hotel</strong>.  
-                    Secure your perfect getaway today.</p>
-            </div>
-        </div>
+  <section id="booking" class="py-5">
+    <div class="container">
+      <h1 class="text-center mb-4">Book Your Stay</h1>
+        <form id="bookingForm" class="row g-4 needs-validation" novalidate>
 
-        <!-- Promotional Section -->
-        <div class="row justify-content-center my-4">
-            <div class="col-md-4 text-center">
-                <!-- <img src="/images/luxury-room.jpg" alt="Luxury Room" class="img-fluid rounded"> -->
-                <h4 class="mt-2">Luxury Rooms</h4>
-                <p>Elegant decor, king-sized beds, and city views.</p>
-            </div>
-            <div class="col-md-4 text-center">
-                <!-- <img src="/images/spa.jpg" alt="Spa" class="img-fluid rounded"> -->
-                <h4 class="mt-2">Relax & Unwind</h4>
-                <p>Exclusive spa & wellness experiences for guests.</p>
-            </div>
-            <div class="col-md-4 text-center">
-                <!-- <img src="/images/dining.jpg" alt="Fine Dining" class="img-fluid rounded"> -->
-                <h4 class="mt-2">Fine Dining</h4>
-                <p>Michelin-starred dining and curated wine selections.</p>
-            </div>
-        </div>
+          <!-- Booking Details -->
+          <div class="col-md-6">
+            <label for="checkin" class="form-label">Check-in Date</label>
+            <input type="date" class="form-control" id="checkin" name="checkin" required>
+            <div class="valid-feedback">Correct.</div>
+            <div class="invalid-feedback">Please select a check-in date.</div>
+          </div>
 
-        <!-- Booking Form Section -->
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow-lg p-4">
-                    <h2 class="mb-3 text-center" style="color: #A4436B;">Reservation Details</h2>
+          <div class="col-md-6">
+            <label for="checkout" class="form-label">Check-out Date</label>
+            <input type="date" class="form-control" id="checkout" name="checkout" required>
+            <div class="valid-feedback">Correct.</div>
+            <div class="invalid-feedback">Please select a check-out date.</div>
+          </div>
 
-                    <!-- Error Message Box -->
-                    <div id="errorMessage" class="alert alert-danger text-center d-none" role="alert">
-                        Error - something needs fixing.
-                    </div>
+          <div class="col-md-6">
+            <label for="r_class" class="form-label">Room Type</label>
+            <select class="form-select" id="r_class" name="r_class" required>
+              <option value="" selected disabled>Select Room Type</option>
+              <option value="std_d">Standard Double</option>
+              <option value="std_t">Standard Twin</option>
+              <option value="sup_d">Superior Double</option>
+              <option value="sup_t">Superior Twin</option>
+            </select>
+            <div class="valid-feedback">Correct.</div>
+            <div class="invalid-feedback">Please select a room type.</div>
+          </div>
 
-                    <form id="bookingForm">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="customerName" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="customerName" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" required>
-                            </div>
-                        </div>
+          <div class="col-md-6">
+            <label for="room_count" class="form-label">Number of Rooms</label>
+            <input type="number" class="form-control" id="room_count" name="room_count" min="1" max="5" required>
+            <div class="valid-feedback">Correct.</div>
+            <div class="invalid-feedback">Enter 1-5 rooms.</div>
+          </div>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="checkin" class="form-label">Check-in Date</label>
-                                <input type="date" class="form-control" id="checkin" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="checkout" class="form-label">Check-out Date</label>
-                                <input type="date" class="form-control" id="checkout" required>
-                            </div>
-                        </div>
+          <!-- Notes -->
+          <div class="col-12">
+            <label for="b_notes" class="form-label">Booking Notes</label>
+            <textarea class="form-control" id="b_notes" name="b_notes" rows="3"></textarea>
+          </div>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="roomType" class="form-label">Room Type</label>
-                                <select class="form-control" id="roomType" required>
-                                    <option value="" disabled selected>Select your room</option>
-                                    <option value="double">Double Room</option>
-                                    <option value="twin">Twin Room</option>
-                                    <option value="superior">Superior Suite</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="guests" class="form-label">Guests</label>
-                                <input type="number" class="form-control" id="guests" min="1" required>
-                            </div>
-                        </div>
+          <!-- Button to Check Availability -->
+          <div class="col-12 text-center">
+            <button type="submit" class="btn px-5">Check Availability</button>
+          </div>
 
-                        <button type="submit" class="btn btn-primary w-100 mt-3" style="background-color: #A4436B; border-color: #A4436B;">
-                            Confirm Booking
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <p class="mt-4 text-muted text-center">
-            Need assistance?  
-            <a href="/contact" class="text-decoration-none text-primary">Contact us</a> for support.
-        </p>
+          <!-- Placeholder for Unavailable Status Message -->
+          <div id="availabilityMessage" class="text-center mt-4"></div>
+        </form>
+      </div>
     </div>
+  </section>
 
-    <div id="footer"></div>
+  <div id="footer"></div>
 
-    <script src="/js/components.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('bookingForm').onsubmit = async function(event) {
-                event.preventDefault();
-
-                const errorMessage = document.getElementById("errorMessage");
-                errorMessage.classList.add("d-none"); // Hide previous error message
-
-                const bookingData = {
-                    customerName: document.getElementById('customerName').value,
-                    email: document.getElementById('email').value,
-                    checkInDate: document.getElementById('checkin').value,
-                    checkOutDate: document.getElementById('checkout').value,
-                    roomType: document.getElementById('roomType').value,
-                    guests: document.getElementById('guests').value
-                };
-
-                try {
-                    const response = await fetch('/api/book', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(bookingData)
-                    });
-
-                    const result = await response.json();
-
-                    if (response.ok) {
-                        window.location.href = `/confirmation.html?bookingRef=${result.bookingRef}`;
-                    } else {
-                        errorMessage.textContent = "Error - something needs fixing.";
-                        errorMessage.classList.remove("d-none"); // Show error message
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    errorMessage.textContent = "Error - something needs fixing.";
-                    errorMessage.classList.remove("d-none"); // Show error message
-                }
-            };
-        });
-    </script>
+  <script src="/js/components.js"></script> 
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        return;
+      }
+      const available = true; // Replace with backend availability check later
+      if (available) {
+        window.location.href = "payment.html";
+      } else {
+        document.getElementById("availabilityMessage").innerHTML =
+          '<div class="alert alert-warning">Sorry, your selected room type is not available. Please try a different type or date.</div>';
+      }
+    });
+  </script>
 </body>
 </html>
