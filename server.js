@@ -36,6 +36,7 @@ app.get('/booking', (req, res) => res.sendFile(path.join(__dirname, 'public', 'b
 app.get('/confirmation', (req, res) => res.sendFile(path.join(__dirname, 'public', 'confirmation.html')));
 app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'public', 'contact.html')));
 app.get('/outAndAbout', (req, res) => res.sendFile(path.join(__dirname, 'public', 'outAndAbout.html')));
+app.get('/restaurantPage', (req, res) => res.sendFile(path.join(__dirname, 'public', 'restaurantPage.html')));
 
 // 📌 Staff Pages
 app.get('/staff/reports', (req, res) => res.sendFile(path.join(__dirname, 'staff', 'reports.html')));
