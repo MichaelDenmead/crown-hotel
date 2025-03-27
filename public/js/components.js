@@ -38,3 +38,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // Load Footer
     loadComponent('footer', '/components/footer.html');
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Add event listener to all elements with 'data-bs-target="imageModal"'
+    const imageLinks = document.querySelectorAll('a[data-bs-target="#imageModal"]');
+
+    imageLinks.forEach((link)=> {
+        link.addEventListener("click", function () {
+            const modalTitle = document.getElementById("imageModalLabel");
+            const newTitle = this.getAttribute("data-bs-title"); // Get the title from the data-bs-title element
+            modalTitle.textContent = newTitle; // Update the modal title
+            const imgElement = this.querySelector("img");
+            if (imgElement) {
+                const modalImage = document.getElementById("modalImage");
+                modalImage.src = imgElement.src;
+            }
+        });
+    });
+});
