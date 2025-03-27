@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/MichaelDenmead/crown-hotel/issues"
   },
-  "homepage": "https://github.com/MichaelDenmead/crown-hotel#readme"
+  "homepage": "https://github.com/MichaelDenmead/crown-hotel#readme",
+  "devDependencies": {
+    "critical": "^7.2.1"
+  }
 }

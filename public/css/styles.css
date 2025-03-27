@@ -28,11 +28,8 @@
 }
 
 
-<<<<<<< Updated upstream
+
 /* ✅ Buttons - disabled temporarily (Allen)
-=======
-/* ✅ Buttons - Temporarily Disabled for Update
->>>>>>> Stashed changes
 .btn-primary {
     background-color: #A4436B !important;
     border-color: #A4436B !important;
@@ -56,6 +53,7 @@
     background-color: #A4436B !important;
     color: white !important;
 } */
+
 
 /* ✅ Navbar Brand */
 .navbar-brand {
