@@ -75,6 +75,8 @@
 
 .navbar-nav .nav-link:hover {
     color: #253026 !important;
+    font-weight: bold;
+    transform: scale(1.05);
 }
 
 /* ✅ Dropdown Menu */
@@ -144,3 +146,112 @@
 #services h3 {
     color: #b7594a;
 }
+
+
+/* ✅ Booking Form */
+#booking .container {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#booking h1 {
+    font-weight: 700;
+    color: #617697;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#bookingForm .form-label {
+    font-weight: bold;
+}
+
+#bookingForm button[type='submit'] {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #617697;
+    border-color: #617697;
+    color: white;
+}
+
+#bookingForm button[type='submit']:hover {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #4a5a72;
+    border-color: #4a5a72;
+}
+
+/* ✅ Payment Form */
+#payment h2 {
+    font-weight: 700;
+    color: #A4436B;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#paymentForm button[type='submit'] {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    color: white;
+    background-color: #A4436B;
+    border-color: #A4436B;
+}
+
+#paymentForm button[type='submit']:hover {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #8C375D;
+    border-color: #8C375D;
+}
+
+/* ✅ Contact Form */
+#contact .container {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#contact h1 {
+    font-weight: 700;
+    color: #516054;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#contactForm .form-label {
+    font-weight: bold;
+}
+
+#contactForm button[type='submit'] {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #516054;
+    border-color: #516054;
+    color: white;
+}
+
+#contactForm button[type='submit']:hover {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #3d4b3f;
+    border-color: #3d4b3f;
+}
+
+/* ✅ Footer */
+.bg-hotel-green {
+    background-color: #253026; /* Example custom green */
+    color: white;
+  }
+  
