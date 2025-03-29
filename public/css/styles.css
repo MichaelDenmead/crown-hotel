@@ -28,7 +28,8 @@
 }
 
 
-/* ✅ Buttons */
+
+/* ✅ Buttons - disabled temporarily (Allen)
 .btn-primary {
     background-color: #A4436B !important;
     border-color: #A4436B !important;
@@ -51,7 +52,8 @@
 .btn-outline-primary:active {
     background-color: #A4436B !important;
     color: white !important;
-}
+} */
+
 
 /* ✅ Navbar Brand */
 .navbar-brand {
@@ -93,6 +95,11 @@
     transition: opacity 0.3s ease-in-out;
 }
 
+/* ✅ Dropdown Arrow -Removed for Facilities */
+.navbar .dropdown-toggle::after {
+    display: none !important;
+}
+
 /* ✅ Dropdown Items - Match Navbar Links */
 .nav-item.dropdown .dropdown-menu .dropdown-item {
     color: #516054 !important;
@@ -105,6 +112,8 @@
 /* ✅ Book Now Button */
 .navbar .book-now {
     background-color: #A4436B;
+    padding: 0.25rem;    /* smaller height */
+    margin-top: 0.25rem; /* aligns it vertically */
     color: white !important;
     border-radius: 10px;
 }
@@ -135,58 +144,3 @@
 #services h3 {
     color: #b7594a;
 }
-
-/* Override Bootstrap modal dialog sizing */
-/* .modal-dialog.modal-lg {
-    max-width: 100%; 
-} */
-
-/* Centre the modal-dialog*/
-.modal-dialog {
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-/* modal dialog settings */
-.modal-dialog-centered {
-    max-width: 95vw; /* Limit the width in viewport */
-    max-height: 95vh; /* Limit the height in viewport */
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-}
-
-/* modal content settings */
-.modal-content {
-    width: auto;
-    height: auto; 
-    border-radius: 0.5rem; /* Add rounded corners */
-    padding: 0; /* Remove padding */
-}
-
-/* modal image settings */
-#modalImage {
-    max-width: 100%;
-    max-height: 95vh; /* Prevent image overflow beyond viewport height */
-    width: auto; /* Keep aspect ratio */
-    height: auto;
-}
-/* Center the image inside the modal */
-/* .modal-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1; 
-} */
-
-/* Ensure the image scales appropriately */
-/* .modal-body img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain; 
-} */
