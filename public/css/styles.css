@@ -95,6 +95,11 @@
     transition: opacity 0.3s ease-in-out;
 }
 
+/* ✅ Dropdown Arrow -Removed for Facilities */
+.navbar .dropdown-toggle::after {
+    display: none !important;
+}
+
 /* ✅ Dropdown Items - Match Navbar Links */
 .nav-item.dropdown .dropdown-menu .dropdown-item {
     color: #516054 !important;
@@ -170,6 +175,49 @@
     color: white;
 }
 
+<<<<<<< Updated upstream
+=======
+/* Ensure the image scales appropriately */
+/* .modal-body img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; 
+} */
+
+
+/* ✅ Booking Form */
+#booking .container {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#booking h1 {
+    font-weight: 700;
+    color: #617697;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#bookingForm .form-label {
+    font-weight: bold;
+}
+
+#bookingForm button[type='submit'] {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #617697;
+    border-color: #617697;
+    color: white;
+}
+
+>>>>>>> Stashed changes
 #bookingForm button[type='submit']:hover {
     font-size: 1.1rem;
     padding: 0.75rem 2.5rem;
@@ -201,4 +249,53 @@
     border-radius: 50px;
     background-color: #8C375D;
     border-color: #8C375D;
+<<<<<<< Updated upstream
 }
+=======
+}
+
+/* ✅ Contact Form */
+#contact .container {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#contact h1 {
+    font-weight: 700;
+    color: #516054;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#contactForm .form-label {
+    font-weight: bold;
+}
+
+#contactForm button[type='submit'] {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #516054;
+    border-color: #516054;
+    color: white;
+}
+
+#contactForm button[type='submit']:hover {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #3d4b3f;
+    border-color: #3d4b3f;
+}
+
+/* ✅ Footer */
+.bg-hotel-green {
+    background-color: #516054; /* Example custom green */
+    color: white;
+  }
+  
+>>>>>>> Stashed changes
