@@ -254,4 +254,53 @@
     background-color: #253026; /* Example custom green */
     color: white;
   }
+
+/* ✅ Room Page */
+/* Action Links */
+.learn-more-link {
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+  
+  /* Book Now Button */
+  .book-now-btn {
+    display: inline-block;
+    padding: 10px 28px;
+    border: 1px solid #1c1c1c;
+    color: #1c1c1c;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+  }
+  
+  .book-now-btn:hover {
+    background-color: #b7594a;
+    color: #fff;
+  }
+
+/* Rounded room images */
+/* ✅ Lock image height and prevent resizing issues */
+.carousel-inner {
+    height: 420px; /* Consistent height */
+  }
+  
+  .carousel-inner img {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  
+/* Room Price Styling */
+.room-price {
+    font-style: italic;
+    color: #b7594a;
+    font-size: 1.1rem;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+  }
   
