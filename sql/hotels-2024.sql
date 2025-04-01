@@ -1,3 +1,13 @@
+SELECT * FROM hotelbooking.booking;
+SELECT * FROM hotelbooking.customer;
+SELECT * FROM hotelbooking.rates;
+SELECT * FROM hotelbooking.room;
+SELECT * FROM hotelbooking.roombooking;
+
+
+DROP TABLE IF EXISTS public.customer CASCADE;
+
+
 create schema hotelbooking;
 set schema 'hotelbooking';
 
@@ -8,7 +18,7 @@ set schema 'hotelbooking';
 --drop table room;
 --drop table rates;
 
-create table customer (
+create table hotelbooking.customer (
 	c_no integer unique not null,
 	c_name varchar(80) not null,
 	c_email varchar(60) not null,
@@ -20,7 +30,7 @@ create table customer (
 	primary key (c_no)
 );
 
-create table room (
+create table hotelbooking.room (
 	r_no integer unique not null,
 	r_class char(5) not null,
 	check (r_class in ('std_d', 'std_t', 'sup_d', 'sup_t')),
@@ -30,29 +40,29 @@ create table room (
 	primary key (r_no)
 );
 
-create table rates (
+create table hotelbooking.rates (
 	r_class char(5),
 	price decimal(6,2)
 );
 
-create table booking (
+create table hotelbooking.booking (
 	b_ref integer unique not null,
-	c_no integer references customer,
+	c_no integer references hotelbooking.customer,
 	b_cost decimal(6,2),
 	b_outstanding decimal(6,2),
 	b_notes varchar(300),
 	primary key (b_ref)
 );
 
-create table roombooking (
-	r_no integer references room,
-	b_ref integer references booking,
+create table hotelbooking.roombooking (
+	r_no integer references hotelbooking.room,
+	b_ref integer references hotelbooking.booking,
 	checkin date not null,
 	checkout date not null,
 	primary key (r_no, b_ref)
 );
 
-
+set schema 'hotelbooking';
 insert into room values (101, 'sup_d', 'A', '');
 insert into room values (102, 'sup_d', 'A', '');
 insert into room values (103, 'std_d', 'A', '');
@@ -86,11 +96,18 @@ insert into room values (310, 'sup_t', 'A', '');
 insert into room values (311, 'sup_t', 'A', '');
 insert into room values (312, 'sup_t', 'A', '');
 
+SELECT * FROM hotelbooking.room;
+
+set schema 'hotelbooking';
 insert into rates values ('std_t', 62);
 insert into rates values ('std_d', 65);
 insert into rates values ('sup_t', 75);
 insert into rates values ('sup_d', 77);
 
+SELECT * FROM hotelbooking.rates;
+
+
+set schema 'hotelbooking';
 insert into customer values (12008, 'Ann Hinchcliffe', 'Ann.Hinchcliffe@yahoo.com', '81 New Road, Acle NR13 7GH', 'V', '10/25', '8948106927123585');
 insert into customer values (12036, 'Carol Pearson', 'Carol.Pearson@gmail.com', '40 St Mark''s Road, London E23 5LW', 'V', '09/26', '9183767246807868');
 insert into customer values (12037, 'Cherrill Fisher', 'Cherrill.Fisher@yahoo.com', '14 Bernard Road, Norwich NR6 7LL', 'MC', '05/25', '5491775659602051');
@@ -138,7 +155,11 @@ insert into customer values (12931, 'Vanessa Burns', 'Vanessa.Burns@yahoo.com', 
 insert into customer values (12932, 'Zoe Smallbone', 'Zoe.Smallbone@yahoo.com', '5 Lime Tree Avenue, Hethersett NR18 1FK', 'V', '06/25', '8703274271879718');
 insert into customer values (12953, 'Andrew Spalding', 'Andrew.Spalding@yahoo.com', '30 Castle Precincts, Acle NR13 2AY', 'V', '12/25', '6101225280422702');
 
+SELECT * FROM hotelbooking.customer;
 
+
+
+set schema 'hotelbooking';
 insert into booking values (13011, 12146, 0, 0, '');
 insert into booking values (13052, 12205, 0, 0, '');
 insert into booking values (13066, 12931, 0, 0, '');
@@ -241,6 +262,10 @@ insert into booking values (15934, 12037, 0, 0, '');
 insert into booking values (15960, 12175, 0, 0, '');
 insert into booking values (15975, 12596, 0, 0, '');
 
+SELECT * FROM hotelbooking.booking;
+
+
+set schema 'hotelbooking';
 update booking set b_cost=130.00 where b_ref=13011;
 update booking set b_cost=308.00 where b_ref=13052;
 update booking set b_cost=770.00 where b_ref=13066;
@@ -342,9 +367,15 @@ update booking set b_cost=231.00 where b_ref=15822;
 update booking set b_cost=124.00 where b_ref=15934;
 update booking set b_cost=556.00 where b_ref=15960;
 update booking set b_cost=186.00 where b_ref=15975;
- 
+
+SELECT * FROM hotelbooking.booking;
+
+
+set schema 'hotelbooking'; 
 update booking set b_outstanding = b_cost;
 
+
+set schema 'hotelbooking';
 insert into roombooking values (101, 13505, '29Jan2024', '31Jan2024');
 insert into roombooking values (101, 14101, '18Nov2024', '22Nov2024');
 insert into roombooking values (101, 15489, '01Feb2024', '04Feb2024');
@@ -505,9 +536,13 @@ insert into roombooking values (311, 14184, '11Jan2024', '15Jan2024');
 insert into roombooking values (311, 15410, '21Jan2024', '22Jan2024');
 insert into roombooking values (311, 15731, '09Dec2024', '12Dec2024');
 
+SELECT * FROM hotelbooking.roombooking;
+
+
+set schema 'hotelbooking';
 update booking set b_outstanding=0 where b_ref in (
 select b.b_ref from booking b, roombooking rb 
-where b.b_ref=rb.b_ref and rb.checkout < '16Oct2024');
+where b.b_ref=rb.b_ref and rb.checkout < '12May2025');
 
 --- end of database setup ---
 

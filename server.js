@@ -48,7 +48,7 @@ app.get('/staff/reports', (req, res) => res.sendFile(path.join(__dirname, 'staff
 // EJS Booking Page
 app.get('/booking', async (req, res) => {
     try {
-        const { rows } = await pool.query("SELECT DISTINCT r_class AS type FROM room WHERE r_status = 'A'");
+        const { rows } = await pool.query("SELECT DISTINCT r_class AS type FROM hotelbooking.room WHERE r_status = 'A'");
         res.render('booking', { roomTypes: rows });
     } catch (err) {
         console.error('Error fetching room types:', err);
@@ -74,7 +74,7 @@ app.get('/api/rooms', async (req, res) => {
 // Fetch All Bookings (GET /api/bookings)
 app.get('/api/bookings', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM booking');
+        const result = await pool.query('SELECT * FROM hotelbooking.booking');
         res.json(result.rows);
     } catch (err) {
         console.error('Database query error:', err);
@@ -91,7 +91,7 @@ app.post('/api/book', async (req, res) => {
 
         // STEP 1️⃣: Get or create the customer
         let customerResult = await pool.query(
-            "SELECT c_no FROM customer WHERE c_email = $1",
+            "SELECT c_no FROM hotelbooking.customer WHERE c_email = $1",
             [email]
         );
 
@@ -102,7 +102,7 @@ app.post('/api/book', async (req, res) => {
             console.log("👤 Existing Customer ID:", customerId);
         } else {
             const newCustomer = await pool.query(
-                `INSERT INTO customer (c_name, c_email, c_address)
+                `INSERT INTO hotelbooking.customer (c_name, c_email, c_address)
                  VALUES ($1, $2, 'TEMP ADDRESS') RETURNING c_no`,
                 [customerName, email]
             );
@@ -133,7 +133,7 @@ app.post('/api/book', async (req, res) => {
         // STEP 2️⃣: Find an available room with no overlap
         const roomResult = await pool.query(`
             SELECT r.r_no 
-            FROM room r
+            FROM hotelbooking.room r
             WHERE r.r_class = $1
             AND NOT EXISTS (
                 SELECT 1 FROM roombooking rb
@@ -153,7 +153,7 @@ app.post('/api/book', async (req, res) => {
 
         // STEP 3️⃣: Create booking
         const bookingResult = await pool.query(
-            `INSERT INTO booking (c_no, b_cost, b_outstanding, b_notes)
+            `INSERT INTO hotelbooking.booking (c_no, b_cost, b_outstanding, b_notes)
              VALUES ($1, 0, 0, 'Online booking') RETURNING b_ref`,
             [customerId]
         );
@@ -163,7 +163,7 @@ app.post('/api/book', async (req, res) => {
 
         // STEP 4️⃣: Link room with dates
         await pool.query(
-            `INSERT INTO roombooking (b_ref, r_no, checkin, checkout, guests)
+            `INSERT INTO hotelbooking.roombooking (b_ref, r_no, checkin, checkout, guests)
              VALUES ($1, $2, $3, $4, $5)`,
             [bookingRef, roomNo, checkInDate, checkOutDate, guests]
         );
@@ -201,7 +201,7 @@ app.get('/api/booking/:b_ref', async (req, res) => {
             rb.checkout - rb.checkin AS nights,
             rb.guests
         FROM booking b
-        JOIN customer c ON b.c_no = c.c_no
+        JOIN hotelbooking.customer c ON b.c_no = c.c_no
         JOIN roombooking rb ON b.b_ref = rb.b_ref
         JOIN room r ON rb.r_no = r.r_no
         WHERE b.b_ref = $1
