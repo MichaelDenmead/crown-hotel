@@ -20,17 +20,14 @@
         <!-- Promotional Section -->
         <div class="row justify-content-center my-4">
             <div class="col-md-4 text-center">
-                <!-- <img src="/images/luxury-room.jpg" alt="Luxury Room" class="img-fluid rounded"> -->
                 <h4 class="mt-2">Luxury Rooms</h4>
                 <p>Elegant decor, king-sized beds, and city views.</p>
             </div>
             <div class="col-md-4 text-center">
-                <!-- <img src="/images/spa.jpg" alt="Spa" class="img-fluid rounded"> -->
                 <h4 class="mt-2">Relax & Unwind</h4>
                 <p>Exclusive spa & wellness experiences for guests.</p>
             </div>
             <div class="col-md-4 text-center">
-                <!-- <img src="/images/dining.jpg" alt="Fine Dining" class="img-fluid rounded"> -->
                 <h4 class="mt-2">Fine Dining</h4>
                 <p>Michelin-starred dining and curated wine selections.</p>
             </div>
@@ -44,7 +41,7 @@
 
                     <!-- Error Message Box -->
                     <div id="errorMessage" class="alert alert-danger text-center d-none" role="alert">
-                        Error - something needs fixing.
+                        Error – something needs fixing.
                     </div>
 
                     <form id="bookingForm">
@@ -75,9 +72,9 @@
                                 <label for="roomType" class="form-label">Room Type</label>
                                 <select class="form-control" id="roomType" required>
                                     <option value="" disabled selected>Select your room</option>
-                                    <option value="double">Double Room</option>
-                                    <option value="twin">Twin Room</option>
-                                    <option value="superior">Superior Suite</option>
+                                    <% roomTypes.forEach(room => { %>
+                                        <option value="<%= room.type %>"><%= room.type %></option>
+                                    <% }); %>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -105,12 +102,13 @@
     <script src="/js/components.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('bookingForm').onsubmit = async function(event) {
+            const form = document.getElementById('bookingForm');
+            const errorMessage = document.getElementById('errorMessage');
+        
+            form.addEventListener('submit', async function (event) {
                 event.preventDefault();
-
-                const errorMessage = document.getElementById("errorMessage");
-                errorMessage.classList.add("d-none"); // Hide previous error message
-
+                errorMessage.classList.add("d-none");
+        
                 const bookingData = {
                     customerName: document.getElementById('customerName').value,
                     email: document.getElementById('email').value,
@@ -119,29 +117,48 @@
                     roomType: document.getElementById('roomType').value,
                     guests: document.getElementById('guests').value
                 };
-
+        
                 try {
-                    const response = await fetch('/api/book', {
+                    let response = await fetch('/api/book', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(bookingData)
                     });
-
-                    const result = await response.json();
-
+        
+                    let result = await response.json();
+        
+                    if (response.status === 409 && result.allowDuplicate) {
+                        const confirm = window.confirm(result.message);
+                        if (confirm) {
+                            bookingData.confirmDuplicate = true;
+        
+                            // Retry the request with confirmation
+                            response = await fetch('/api/book', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(bookingData)
+                            });
+        
+                            result = await response.json();
+                        } else {
+                            return; // user cancelled
+                        }
+                    }
+        
                     if (response.ok) {
                         window.location.href = `/confirmation.html?bookingRef=${result.bookingRef}`;
                     } else {
-                        errorMessage.textContent = "Error - something needs fixing.";
-                        errorMessage.classList.remove("d-none"); // Show error message
+                        errorMessage.textContent = result.message || "Something went wrong.";
+                        errorMessage.classList.remove("d-none");
                     }
                 } catch (error) {
                     console.error('Error:', error);
-                    errorMessage.textContent = "Error - something needs fixing.";
-                    errorMessage.classList.remove("d-none"); // Show error message
+                    errorMessage.textContent = "Something went wrong.";
+                    errorMessage.classList.remove("d-none");
                 }
-            };
+            });
         });
-    </script>
+        </script>
+        
 </body>
 </html>

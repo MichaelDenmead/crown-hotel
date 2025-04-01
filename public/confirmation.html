@@ -1,19 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head></head> <!-- Head will be replaced dynamically -->
-
+<head>
+  <title>Booking Confirmation | Crown Hotel</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
 <body>
-    <div id="navbar"></div> <!-- Navbar loads dynamically -->
+  <div id="navbar"></div>
 
-    <div class="container mt-5 text-center">
-        <h1>Booking Confirmed</h1>
-        <p class="lead">Thank you for booking with Crown Hotel!</p>
-        <p>Your reservation details have been sent to your email.</p>
-        <a href="/" class="btn btn-primary">Back to Home</a>
+  <div class="container mt-5 text-center">
+    <h1 class="mb-3">Booking Confirmed</h1>
+    <p class="lead">Thank you for booking with <strong>Crown Hotel</strong>!</p>
+    <p>Your reservation details are below and have been sent to your email.</p>
+
+    <div class="card shadow p-4 my-4 mx-auto" style="max-width: 600px;">
+      <h4 class="mb-3" style="color: #A4436B;">Booking Summary</h4>
+      <div id="bookingDetails">
+        <p>Loading booking information...</p>
+      </div>
     </div>
 
-    <div id="footer"></div> <!-- Footer loads dynamically -->
+    <a href="/" class="btn btn-primary" style="background-color: #A4436B; border-color: #A4436B;">
+      Back to Home
+    </a>
+  </div>
 
-    <script src="/js/components.js"></script> <!-- Ensure this is at the end -->
+  <div id="footer"></div>
+
+  <script src="/js/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const bookingRef = urlParams.get('bookingRef');
+
+      const container = document.getElementById("bookingDetails");
+
+      if (!bookingRef) {
+        container.innerHTML = "<p class='text-danger'>No booking reference found.</p>";
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/booking/${bookingRef}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          container.innerHTML = `<p class="text-danger">${data.message || 'Unable to fetch booking details.'}</p>`;
+          return;
+        }
+
+        container.innerHTML = `
+        <p><strong>Booking Reference:</strong> ${data.b_ref}</p>
+        <p><strong>Guest:</strong> ${data.c_name} (${data.c_email})</p>
+        <p><strong>Room:</strong> ${data.r_class} (Room No: ${data.r_no})</p>
+        <p><strong>Dates:</strong> ${data.check_in} to ${data.check_out} (${data.nights} nights)</p>
+        <p><strong>Guests:</strong> ${data.guests}</p>
+      `;
+      
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = `<p class="text-danger">There was an error loading your booking.</p>`;
+      }
+    });
+  </script>
 </body>
 </html>
