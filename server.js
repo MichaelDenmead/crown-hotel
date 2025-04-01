@@ -63,7 +63,7 @@ app.get('/booking', async (req, res) => {
 // Fetch Available Rooms (GET /api/rooms)
 app.get('/api/rooms', async (req, res) => {
     try {
-        const result = await pool.query("SELECT * FROM room WHERE r_status = 'A'");
+        const result = await pool.query("SELECT * FROM hotelbooking.room WHERE r_status = 'A'");
         res.json(result.rows);
     } catch (err) {
         console.error('Database query error:', err);
@@ -113,9 +113,9 @@ app.post('/api/book', async (req, res) => {
         // STEP 1️⃣.5: Check for accidental duplicate booking
         const duplicateCheck = await pool.query(`
             SELECT 1
-            FROM booking b
-            JOIN roombooking rb ON b.b_ref = rb.b_ref
-            JOIN room r ON rb.r_no = r.r_no
+            FROM hotelbooking.booking b
+            JOIN hotelbooking.roombooking rb ON b.b_ref = rb.b_ref
+            JOIN hotelbooking.room r ON rb.r_no = r.r_no
             WHERE b.c_no = $1
             AND rb.checkin = $2
             AND rb.checkout = $3
@@ -136,7 +136,7 @@ app.post('/api/book', async (req, res) => {
             FROM hotelbooking.room r
             WHERE r.r_class = $1
             AND NOT EXISTS (
-                SELECT 1 FROM roombooking rb
+                SELECT 1 FROM hotelbooking.roombooking rb
                 WHERE rb.r_no = r.r_no
                 AND rb.checkin < $3
                 AND rb.checkout > $2
@@ -163,14 +163,14 @@ app.post('/api/book', async (req, res) => {
 
         // STEP 4️⃣: Link room with dates
         await pool.query(
-            `INSERT INTO hotelbooking.roombooking (b_ref, r_no, checkin, checkout, guests)
-             VALUES ($1, $2, $3, $4, $5)`,
-            [bookingRef, roomNo, checkInDate, checkOutDate, guests]
+            `INSERT INTO hotelbooking.roombooking (b_ref, r_no, checkin, checkout)
+             VALUES ($1, $2, $3, $4)`,
+            [bookingRef, roomNo, checkInDate, checkOutDate]
         );
 
         // STEP 5️⃣: Update room status
         await pool.query(
-            "UPDATE room SET r_status = 'O' WHERE r_no = $1",
+            "UPDATE hotelbooking.room SET r_status = 'O' WHERE r_no = $1",
             [roomNo]
         );
 
@@ -200,10 +200,10 @@ app.get('/api/booking/:b_ref', async (req, res) => {
             TO_CHAR(rb.checkout, 'DD Mon YYYY') AS check_out,
             rb.checkout - rb.checkin AS nights,
             rb.guests
-        FROM booking b
+        FROM hotelbooking.booking b
         JOIN hotelbooking.customer c ON b.c_no = c.c_no
-        JOIN roombooking rb ON b.b_ref = rb.b_ref
-        JOIN room r ON rb.r_no = r.r_no
+        JOIN hotelbooking.roombooking rb ON b.b_ref = rb.b_ref
+        JOIN hotelbooking.room r ON rb.r_no = r.r_no
         WHERE b.b_ref = $1
         LIMIT 1
     `, [b_ref]);
@@ -230,7 +230,7 @@ app.delete('/api/booking/:b_ref', async (req, res) => {
 
     try {
         const roomQuery = await pool.query(
-            "SELECT r_no FROM roombooking WHERE b_ref = $1", 
+            "SELECT r_no FROM hotelbooking.roombooking WHERE b_ref = $1", 
             [b_ref]
         );
 
@@ -240,9 +240,9 @@ app.delete('/api/booking/:b_ref', async (req, res) => {
 
         const roomNo = roomQuery.rows[0].r_no;
 
-        await pool.query("DELETE FROM roombooking WHERE b_ref = $1", [b_ref]);
-        await pool.query("DELETE FROM booking WHERE b_ref = $1", [b_ref]);
-        await pool.query("UPDATE room SET r_status = 'A' WHERE r_no = $1", [roomNo]);
+        await pool.query("DELETE FROM hotelbooking.roombooking WHERE b_ref = $1", [b_ref]);
+        await pool.query("DELETE FROM hotelbooking.booking WHERE b_ref = $1", [b_ref]);
+        await pool.query("UPDATE hotelbooking.room SET r_status = 'A' WHERE r_no = $1", [roomNo]);
 
         res.status(200).json({ message: 'Booking successfully cancelled' });
 

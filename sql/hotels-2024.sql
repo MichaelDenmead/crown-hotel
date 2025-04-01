@@ -4,8 +4,9 @@ SELECT * FROM hotelbooking.rates;
 SELECT * FROM hotelbooking.room;
 SELECT * FROM hotelbooking.roombooking;
 
+SELECT * FROM hotelbooking.booking
+WHERE c_no = 47;  -- or whatever the correct customer ID is
 
-DROP TABLE IF EXISTS public.customer CASCADE;
 
 
 create schema hotelbooking;
