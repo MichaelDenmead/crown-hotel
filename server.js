@@ -1,9 +1,10 @@
-
 // server.js - Express Server with PostgreSQL Connection
-const express = require('express');
-const path = require('path');
-const pool = require('./db'); // PostgreSQL database connection
 require('dotenv').config(); // Load environment variables
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
+const bcrypt = require('bcrypt');
+const pool = require('./db'); // PostgreSQL database connection
 
 const app = express();
 const PORT = 3000; // Server port
@@ -14,6 +15,14 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Middleware to parse JSON requests
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'supersecret', // store securely
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // set true only if using HTTPS
+}));
+
 
 // -------------------------------
 // Serve Static Files (Public & Staff Areas)
@@ -43,14 +52,13 @@ app.get('/outAndAbout', (req, res) => res.sendFile(path.join(__dirname, 'public'
 app.get('/restaurantPage', (req, res) => res.sendFile(path.join(__dirname, 'public', 'restaurantPage.html')));
 
 // Staff Pages
-app.get('/staff/dashboard', (req, res) => {
+app.get('/staff/dashboard', requireLogin, (req, res) => {
     res.render('staff/dashboard', { title: 'Staff Dashboard' });
 });
 
-app.get('/staff/reports', (req, res) => {
+app.get('/staff/reports', requireLogin, (req, res) => {
     res.render('staff/reports', { title: 'Reports' });
 });
-
 
 // EJS Booking Page
 app.get('/booking', async (req, res) => {
@@ -271,6 +279,72 @@ app.delete('/api/booking/:b_ref', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// Login Routes + Middleware
+
+// Middleware to protect staff pages
+function requireLogin(req, res, next) {
+    if (req.session && req.session.staffUser) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
+
+// Login Page (GET)
+app.get('/login', (req, res) => {
+    res.render('login', { error: null });
+});
+
+// Login Submission (POST)
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    console.log("📨 Form submitted:");
+    console.log("🧑 Username:", username);
+    console.log("🔒 Password:", password);
+
+    try {
+        const result = await pool.query('SELECT * FROM hotelbooking.staff WHERE username = $1', [username]);
+
+        console.log("📦 DB Result Row Count:", result.rowCount);
+        console.log("📦 DB Rows:", result.rows);
+
+        if (result.rowCount === 0) {
+            return res.render('login', { error: 'User not found' });
+        }
+
+        const staff = result.rows[0];
+        const match = await bcrypt.compare(password, staff.password);
+        console.log("🔍 Bcrypt match result:", match);
+
+        if (!match) {
+            console.log("❌ Password did not match");
+            return res.render('login', { error: 'Incorrect password' });
+        }
+
+        req.session.staffUser = {
+            id: staff.staff_id,
+            username: staff.username,
+            name: staff.full_name
+        };
+
+        console.log("✅ Login success for", staff.username);
+        res.redirect('/staff/dashboard');
+    } catch (err) {
+        console.error('❌ Login error:', err);
+        res.render('login', { error: 'An error occurred' });
+    }
+});
+
+
+// Logout
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/login');
+    });
+});
+
 
 // Start the server
 app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));

@@ -1,3 +1,21 @@
+-- Create table: staff (to enable login functionality)
+CREATE TABLE hotelbooking.staff (
+    staff_id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    full_name TEXT
+);
+
+INSERT INTO hotelbooking.staff (username, password, full_name)
+VALUES ('admin', '$2b$10$rBaqhohneAmv8mxzFE4IiuNj6WD0u1QH7xZtVF9grrUDmDiJ2Eubu', 'Admin User');
+-- The above password is the bcrypt hash for admin123.
+
+SELECT * FROM hotelbooking.staff WHERE username = 'admin';
+
+INSERT INTO hotelbooking.staff (username, password, full_name)
+VALUES ('tester', '$2b$10$.3AfvkROlR9fMyWGj2baie3AA07BKyUu1j5XVYce7HFgxctMQ4zBu', 'Test User');
+-- The above password is the bcrypt hash for test123.
+
 -- Create table: customer
 CREATE TABLE hotelbooking.customer (
   c_no INTEGER UNIQUE NOT NULL,
