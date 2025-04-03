@@ -7,6 +7,7 @@ SELECT * FROM hotelbooking.roombooking;
 SELECT * FROM hotelbooking.booking
 WHERE c_no = 47;  -- or whatever the correct customer ID is
 
+ALTER TABLE hotelbooking.roombooking ADD COLUMN guests integer;
 
 
 create schema hotelbooking;

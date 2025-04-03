@@ -152,20 +152,36 @@ app.post('/api/book', async (req, res) => {
         console.log("🏨 Room Assigned:", roomNo);
 
         // STEP 3️⃣: Create booking
+        // STEP 3️⃣: Look up rate for room type
+        const rateResult = await pool.query(
+            `SELECT price FROM hotelbooking.rates WHERE r_class = $1`,
+            [roomType]
+        );
+        
+        if (rateResult.rowCount === 0) {
+            console.log("❌ No rate found for room type:", roomType);
+            return res.status(400).json({ message: "No rate found for selected room type." });
+        }
+        
+        const cost = parseFloat(rateResult.rows[0].price);
+        const outstanding = cost;
+        
+        // STEP 4️⃣: Create booking with real price
         const bookingResult = await pool.query(
             `INSERT INTO hotelbooking.booking (c_no, b_cost, b_outstanding, b_notes)
-             VALUES ($1, 0, 0, 'Online booking') RETURNING b_ref`,
-            [customerId]
+            VALUES ($1, $2, $3, 'Online booking') RETURNING b_ref`,
+            [customerId, cost, outstanding]
         );
+        
 
         const bookingRef = bookingResult.rows[0].b_ref;
         console.log("📘 Booking Reference:", bookingRef);
 
         // STEP 4️⃣: Link room with dates
         await pool.query(
-            `INSERT INTO hotelbooking.roombooking (b_ref, r_no, checkin, checkout)
-             VALUES ($1, $2, $3, $4)`,
-            [bookingRef, roomNo, checkInDate, checkOutDate]
+            `INSERT INTO hotelbooking.roombooking (b_ref, r_no, checkin, checkout, guests)
+             VALUES ($1, $2, $3, $4, $5)`,
+            [bookingRef, roomNo, checkInDate, checkOutDate, guests]
         );
 
         // STEP 5️⃣: Update room status
@@ -181,7 +197,6 @@ app.post('/api/book', async (req, res) => {
         res.status(500).json({ error: 'Something went wrong with your booking.' });
     }
 });
-
 
 
 // Retrieve a Booking by Reference (GET /api/booking/:b_ref)
