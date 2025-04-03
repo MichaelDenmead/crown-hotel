@@ -16,6 +16,18 @@ INSERT INTO hotelbooking.staff (username, password, full_name)
 VALUES ('tester', '$2b$10$.3AfvkROlR9fMyWGj2baie3AA07BKyUu1j5XVYce7HFgxctMQ4zBu', 'Test User');
 -- The above password is the bcrypt hash for test123.
 
+ALTER TABLE hotelbooking.staff
+ADD COLUMN role TEXT CHECK (role IN ('receptionist', 'housekeeper')) NOT NULL DEFAULT 'receptionist';
+
+UPDATE hotelbooking.staff
+SET role = 'housekeeper'
+WHERE username = 'tester';
+
+
+SELECT username, role FROM hotelbooking.staff;
+
+
+
 -- Create table: customer
 CREATE TABLE hotelbooking.customer (
   c_no INTEGER UNIQUE NOT NULL,

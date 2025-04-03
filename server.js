@@ -52,13 +52,20 @@ app.get('/outAndAbout', (req, res) => res.sendFile(path.join(__dirname, 'public'
 app.get('/restaurantPage', (req, res) => res.sendFile(path.join(__dirname, 'public', 'restaurantPage.html')));
 
 // Staff Pages
-app.get('/staff/dashboard', requireLogin, (req, res) => {
-    res.render('staff/dashboard', { title: 'Staff Dashboard' });
+app.get('/staff/reception', requireLogin, requireRole('receptionist'), (req, res) => {
+    res.render('staff/reception', {
+        title: 'Reception Dashboard',
+        staffUser: req.session.staffUser
+      });   
 });
 
-app.get('/staff/reports', requireLogin, (req, res) => {
-    res.render('staff/reports', { title: 'Reports' });
+app.get('/staff/housekeeping', requireLogin, requireRole('housekeeper'), (req, res) => {
+    res.render('staff/housekeeping', {
+        title: 'Housekeeping',
+        staffUser: req.session.staffUser
+      });      
 });
+
 
 // EJS Booking Page
 app.get('/booking', async (req, res) => {
@@ -291,6 +298,17 @@ function requireLogin(req, res, next) {
     }
 }
 
+function requireRole(role) {
+    return function (req, res, next) {
+        if (req.session && req.session.staffUser && req.session.staffUser.role === role) {
+            next();
+        } else {
+            res.status(403).send('⛔ Access denied: insufficient permissions.');
+        }
+    };
+}
+
+
 // Login Page (GET)
 app.get('/login', (req, res) => {
     res.render('login', { error: null });
@@ -326,11 +344,19 @@ app.post('/login', async (req, res) => {
         req.session.staffUser = {
             id: staff.staff_id,
             username: staff.username,
-            name: staff.full_name
+            name: staff.full_name,
+            role: staff.role 
         };
 
         console.log("✅ Login success for", staff.username);
-        res.redirect('/staff/dashboard');
+        if (staff.role === 'receptionist') {
+            res.redirect('/staff/reception');
+        } else if (staff.role === 'housekeeper') {
+            res.redirect('/staff/housekeeping'); 
+        } else {
+            res.status(403).send('Role not recognised');
+        }
+        
     } catch (err) {
         console.error('❌ Login error:', err);
         res.render('login', { error: 'An error occurred' });
