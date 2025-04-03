@@ -43,7 +43,14 @@ app.get('/outAndAbout', (req, res) => res.sendFile(path.join(__dirname, 'public'
 app.get('/restaurantPage', (req, res) => res.sendFile(path.join(__dirname, 'public', 'restaurantPage.html')));
 
 // Staff Pages
-app.get('/staff/reports', (req, res) => res.sendFile(path.join(__dirname, 'staff', 'reports.html')));
+app.get('/staff/dashboard', (req, res) => {
+    res.render('staff/dashboard', { title: 'Staff Dashboard' });
+});
+
+app.get('/staff/reports', (req, res) => {
+    res.render('staff/reports', { title: 'Reports' });
+});
+
 
 // EJS Booking Page
 app.get('/booking', async (req, res) => {
@@ -151,7 +158,6 @@ app.post('/api/book', async (req, res) => {
         const roomNo = roomResult.rows[0].r_no;
         console.log("🏨 Room Assigned:", roomNo);
 
-        // STEP 3️⃣: Create booking
         // STEP 3️⃣: Look up rate for room type
         const rateResult = await pool.query(
             `SELECT price FROM hotelbooking.rates WHERE r_class = $1`,
@@ -166,14 +172,13 @@ app.post('/api/book', async (req, res) => {
         const cost = parseFloat(rateResult.rows[0].price);
         const outstanding = cost;
         
-        // STEP 4️⃣: Create booking with real price
+        // STEP 3A: Create booking with price
         const bookingResult = await pool.query(
             `INSERT INTO hotelbooking.booking (c_no, b_cost, b_outstanding, b_notes)
             VALUES ($1, $2, $3, 'Online booking') RETURNING b_ref`,
             [customerId, cost, outstanding]
         );
         
-
         const bookingRef = bookingResult.rows[0].b_ref;
         console.log("📘 Booking Reference:", bookingRef);
 
