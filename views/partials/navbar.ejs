@@ -1,0 +1,28 @@
+<header class="bg-dark text-white p-3 shadow">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <h1 class="h4 mb-0">Crown Hotel - Staff Area</h1>
+    <span>Welcome, <%= staffUser.name %> (<%= staffUser.role %>)</span>
+  </div>
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Dashboard</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <% if (staffUser.role === 'receptionist') { %>
+          <li class="nav-item"><a class="nav-link" href="/staff/reception">Reception Dashboard</a></li>
+        <% } %>
+
+        <% if (staffUser.role === 'housekeeper') { %>
+          <li class="nav-item"><a class="nav-link" href="/staff/housekeeping">Housekeeping</a></li>
+        <% } %>
+
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link text-danger" href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
