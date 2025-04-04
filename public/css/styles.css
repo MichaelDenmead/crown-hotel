@@ -28,7 +28,8 @@
 }
 
 
-/* ✅ Buttons */
+
+/* ✅ Buttons - disabled temporarily (Allen)
 .btn-primary {
     background-color: #A4436B !important;
     border-color: #A4436B !important;
@@ -51,7 +52,8 @@
 .btn-outline-primary:active {
     background-color: #A4436B !important;
     color: white !important;
-}
+} */
+
 
 /* ✅ Navbar Brand */
 .navbar-brand {
@@ -73,6 +75,8 @@
 
 .navbar-nav .nav-link:hover {
     color: #253026 !important;
+    font-weight: bold;
+    transform: scale(1.05);
 }
 
 /* ✅ Dropdown Menu */
@@ -93,6 +97,11 @@
     transition: opacity 0.3s ease-in-out;
 }
 
+/* ✅ Dropdown Arrow -Removed for Facilities */
+.navbar .dropdown-toggle::after {
+    display: none !important;
+}
+
 /* ✅ Dropdown Items - Match Navbar Links */
 .nav-item.dropdown .dropdown-menu .dropdown-item {
     color: #516054 !important;
@@ -105,6 +114,8 @@
 /* ✅ Book Now Button */
 .navbar .book-now {
     background-color: #A4436B;
+    padding: 0.25rem;    /* smaller height */
+    margin-top: 0.25rem; /* aligns it vertically */
     color: white !important;
     border-radius: 10px;
 }
@@ -136,57 +147,160 @@
     color: #b7594a;
 }
 
-/* Override Bootstrap modal dialog sizing */
-/* .modal-dialog.modal-lg {
-    max-width: 100%; 
-} */
 
-/* Centre the modal-dialog*/
-.modal-dialog {
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ✅ Booking Form */
+#booking .container {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-
-/* modal dialog settings */
-.modal-dialog-centered {
-    max-width: 95vw; /* Limit the width in viewport */
-    max-height: 95vh; /* Limit the height in viewport */
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
+#booking h1 {
+    font-weight: 700;
+    color: #617697;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* modal content settings */
-.modal-content {
-    width: auto;
-    height: auto; 
-    border-radius: 0.5rem; /* Add rounded corners */
-    padding: 0; /* Remove padding */
+#bookingForm .form-label {
+    font-weight: bold;
 }
 
-/* modal image settings */
-#modalImage {
-    max-width: 100%;
-    max-height: 95vh; /* Prevent image overflow beyond viewport height */
-    width: auto; /* Keep aspect ratio */
-    height: auto;
+#bookingForm button[type='submit'] {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #617697;
+    border-color: #617697;
+    color: white;
 }
-/* Center the image inside the modal */
-/* .modal-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1; 
-} */
 
-/* Ensure the image scales appropriately */
-/* .modal-body img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain; 
-} */
+#bookingForm button[type='submit']:hover {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #4a5a72;
+    border-color: #4a5a72;
+}
+
+/* ✅ Payment Form */
+#payment h2 {
+    font-weight: 700;
+    color: #A4436B;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#paymentForm button[type='submit'] {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    color: white;
+    background-color: #A4436B;
+    border-color: #A4436B;
+}
+
+#paymentForm button[type='submit']:hover {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #8C375D;
+    border-color: #8C375D;
+}
+
+/* ✅ Contact Form */
+#contact .container {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#contact h1 {
+    font-weight: 700;
+    color: #516054;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#contactForm .form-label {
+    font-weight: bold;
+}
+
+#contactForm button[type='submit'] {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #516054;
+    border-color: #516054;
+    color: white;
+}
+
+#contactForm button[type='submit']:hover {
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    background-color: #3d4b3f;
+    border-color: #3d4b3f;
+}
+
+/* ✅ Footer */
+.bg-hotel-green {
+    background-color: #253026; /* Example custom green */
+    color: white;
+  }
+
+/* ✅ Room Page */
+/* Action Links */
+.learn-more-link {
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+  
+  /* Book Now Button */
+  .book-now-btn {
+    display: inline-block;
+    padding: 10px 28px;
+    border: 1px solid #1c1c1c;
+    color: #1c1c1c;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+  }
+  
+  .book-now-btn:hover {
+    background-color: #b7594a;
+    color: #fff;
+  }
+
+/* Rounded room images */
+/* ✅ Lock image height and prevent resizing issues */
+.carousel-inner {
+    height: 420px; /* Consistent height */
+  }
+  
+  .carousel-inner img {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  
+/* Room Price Styling */
+.room-price {
+    font-style: italic;
+    color: #b7594a;
+    font-size: 1.1rem;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+  }
+  

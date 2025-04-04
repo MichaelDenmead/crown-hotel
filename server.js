@@ -49,7 +49,10 @@ app.get('/facilities', (req, res) => res.sendFile(path.join(__dirname, 'public',
 app.get('/confirmation', (req, res) => res.sendFile(path.join(__dirname, 'public', 'confirmation.html')));
 app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'public', 'contact.html')));
 app.get('/outAndAbout', (req, res) => res.sendFile(path.join(__dirname, 'public', 'outAndAbout.html')));
-app.get('/restaurantPage', (req, res) => res.sendFile(path.join(__dirname, 'public', 'restaurantPage.html')));
+app.get('/restaurant', (req, res) => res.sendFile(path.join(__dirname, 'public', 'restaurant.html')));
+app.get('/bar', (req, res) => res.sendFile(path.join(__dirname, 'public', 'bar.html')));
+app.get('/conference', (req, res) => res.sendFile(path.join(__dirname, 'public', 'conference.html')));
+app.get('/gym', (req, res) => res.sendFile(path.join(__dirname, 'public', 'gym.html')));
 
 // Staff Pages
 app.get('/staff/reception', requireLogin, requireRole('receptionist'), (req, res) => {
