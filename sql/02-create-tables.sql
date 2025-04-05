@@ -6,10 +6,6 @@ CREATE TABLE hotelbooking.staff (
     full_name TEXT
 );
 
-INSERT INTO hotelbooking.staff (username, password, full_name)
-VALUES ('admin', '$2b$10$rBaqhohneAmv8mxzFE4IiuNj6WD0u1QH7xZtVF9grrUDmDiJ2Eubu', 'Admin User');
--- The above password is the bcrypt hash for admin123.
-
 SELECT * FROM hotelbooking.staff;
 SELECT * FROM hotelbooking.booking ORDER BY b_ref DESC;
 
@@ -25,10 +21,6 @@ ORDER BY
   b.b_ref DESC;
 
 
-INSERT INTO hotelbooking.staff (username, password, full_name)
-VALUES ('tester', '$2b$10$.3AfvkROlR9fMyWGj2baie3AA07BKyUu1j5XVYce7HFgxctMQ4zBu', 'Test User');
--- The above password is the bcrypt hash for test123.
-
 ALTER TABLE hotelbooking.staff
 ADD COLUMN role TEXT CHECK (role IN ('receptionist', 'housekeeper')) NOT NULL DEFAULT 'receptionist';
 
@@ -36,9 +28,7 @@ UPDATE hotelbooking.staff
 SET role = 'housekeeper'
 WHERE username = 'tester';
 
-
 SELECT username, role FROM hotelbooking.staff;
-
 
 
 -- Create table: customer
