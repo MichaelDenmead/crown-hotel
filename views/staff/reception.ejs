@@ -1,9 +1,39 @@
-<%- include('../partials/header', { title: 'Staff Dashboard' }) %>
+<%- include('../partials/header', { title: 'Reception Dashboard' }) %>
 <%- include('../partials/navbar') %>
 
+<!-- Main content section -->
 <main class="container my-4 flex-grow-1">
   <h2 class="mb-4">Reception Dashboard</h2>
-  <p class="lead">Check-ins, check-outs and bookings will appear here.</p>  
+  <p class="lead">Manage customer bookings, check-ins and cancellations.</p>
+
+  <!-- Responsive table for booking records -->
+  <div class="table-responsive">
+    <table class="table table-striped" id="bookingTable">
+      <thead class="table-dark">
+        <tr>
+          <th>Booking Ref</th>
+          <th>Guest</th>
+          <th>Room</th>
+          <th>Type</th>
+          <th>Check-in</th>
+          <th>Check-out</th>
+          <th>Nights</th>
+          <th>Guests</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Populated by JS using the Database -->
+      </tbody>
+    </table>
+  </div>
 </main>
+
+<!-- jQuery and DataTables (for sorting, searching, pagination) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- Custom JS for Reception dashboard functionality -->
+<script src="/staff/js/reception.js"></script>
 
 <%- include('../partials/footer') %>

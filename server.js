@@ -98,14 +98,31 @@ app.get('/api/rooms', async (req, res) => {
 
 // Fetch All Bookings (GET /api/bookings)
 app.get('/api/bookings', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT * FROM hotelbooking.booking');
-        res.json(result.rows);
-    } catch (err) {
-        console.error('Database query error:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+  try {
+    const result = await pool.query(`
+      SELECT 
+        b.b_ref,
+        c.c_name,
+        c.c_email,
+        r.r_no,
+        r.r_class,
+        TO_CHAR(rb.checkin, 'YYYY-MM-DD') AS check_in,
+        TO_CHAR(rb.checkout, 'YYYY-MM-DD') AS check_out,
+        rb.checkout - rb.checkin AS nights,
+        rb.guests
+      FROM hotelbooking.booking b
+      JOIN hotelbooking.customer c ON b.c_no = c.c_no
+      JOIN hotelbooking.roombooking rb ON b.b_ref = rb.b_ref
+      JOIN hotelbooking.room r ON rb.r_no = r.r_no
+      ORDER BY rb.checkin ASC
+    `);
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Database query error:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
+
 
 // Create a New Booking (POST /api/book)
 app.post('/api/book', async (req, res) => {
