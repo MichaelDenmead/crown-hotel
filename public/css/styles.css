@@ -6,7 +6,6 @@
 /* Index.html page Hero image responsive size control */
 #home {
     background: url('/resources/hero/hero_small.webp') center/cover no-repeat;
-    
 }
 
 @media (min-width: 768px) {
@@ -24,6 +23,18 @@
 @media (min-width: 1600px) {
     #home {
         background-image: url('/resources/hero/hero_ultrasize.webp');
+    }
+}
+
+@media (min-width: 2560px) {
+    #home {
+        background-image: url('/resources/hero/hero_4k.webp');
+    }
+}
+
+@media (min-width: 3840px) {
+    #home {
+        background-image: url('/resources/hero/hero_max.webp');
     }
 }
 
