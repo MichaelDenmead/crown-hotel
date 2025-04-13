@@ -392,5 +392,92 @@ app.get('/logout', (req, res) => {
 });
 
 
+// Fetch Today's Check-Outs for Housekeeping (GET /api/housekeeping)
+app.get('/api/housekeeping', async (req, res) => {
+    try {
+      const result = await pool.query(`
+        SELECT 
+          r.r_no,
+          CASE
+              WHEN r.r_class = 'std_d' THEN 'Standard Double'
+              WHEN r.r_class = 'std_t' THEN 'Standard Twin'
+              WHEN r.r_class = 'sup_d' THEN 'Superior Double'
+              WHEN r.r_class = 'sup_t' THEN 'Superior Twin'
+              ELSE 'Unknown'
+          END AS r_class,
+          TO_CHAR(rb.checkout, 'YYYY-MM-DD') AS checkout,  -- Formats checkout date as 'YYYY-MM-DD'
+          CAST(r.r_status AS TEXT) AS r_status,  -- Casts r_status as TEXT
+          CASE 
+              WHEN r.r_status = 'C' THEN 'Checked-out'
+              WHEN r.r_status = 'X' THEN 'Cleaning'
+              WHEN r.r_status = 'O' THEN 'Occupied'
+              WHEN r.r_status = 'A' THEN 'Ready for next guest'
+              ELSE 'Unknown Status'
+          END AS r_status_desc
+        FROM hotelbooking.booking b
+        JOIN hotelbooking.customer c ON b.c_no = c.c_no
+        JOIN hotelbooking.roombooking rb ON b.b_ref = rb.b_ref
+        JOIN hotelbooking.room r ON rb.r_no = r.r_no
+        WHERE rb.checkout = CURRENT_DATE
+        ORDER BY 
+            CASE r.r_status 
+                WHEN 'C' THEN 1
+                WHEN 'X' THEN 2
+                WHEN 'O' THEN 3
+                WHEN 'A' THEN 4
+                ELSE 5
+            END,
+            r.r_no ASC
+      `);
+      // console.log("🏨 Housekeeping Data:", result.rows);  // This will log the data before sending it to the frontend
+      result.rows.forEach(row => {
+        // console.log(`🔍 Room ${row.r_no} | Status: ${row.r_status} | Desc: ${row.r_status_desc}`);
+      });   
+  
+      res.json(result.rows);
+    } catch (err) {
+      console.error('❌ Housekeeping query error:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+// Housekeeping status change routes
+// PUT /api/room/:r_no/status
+app.put('/api/room/:r_no/status', async (req, res) => {
+    const { r_no } = req.params;
+    const { newStatus } = req.body; // new status: 'X' (Cleaning) or 'A' (Available)
+  
+    try {
+      // If newStatus is 'X', update status to Cleaning
+      if (newStatus === 'X') {
+        await pool.query(
+          `UPDATE hotelbooking.room
+           SET r_status = 'X'
+           WHERE r_status = 'C'  -- Only rooms that are currently checked-out
+           AND r_no = $1`, 
+          [r_no]  // Update for this specific room
+        );
+      }
+      
+      // If newStatus is 'A', update status to Ready for next guest
+      else if (newStatus === 'A') {
+        await pool.query(
+          `UPDATE hotelbooking.room
+           SET r_status = 'A'
+           WHERE r_status = 'X'  -- Only rooms that are currently being cleaned
+           AND r_no = $1`, 
+          [r_no]  // Update for this specific room
+        );
+      } else {
+        return res.status(400).json({ message: 'Invalid status change requested' });
+      }
+  
+      res.json({ message: `Room ${r_no} updated to status ${newStatus}` });
+    } catch (err) {
+      console.error('❌ Room status update error:', err);
+      res.status(500).json({ message: 'Failed to update room status' });
+    }
+  });
+
 // Start the server
 app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));

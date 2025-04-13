@@ -73,8 +73,8 @@ ORDER BY rb.checkin;
 
 -- LIST ALL CHECK-OUTS DUE TODAY AND PLACE THESE IN A SPECIFIC STATUS ORDER
 SELECT 
-    b.b_ref AS "Booking Ref",
-    c.c_name AS "Guest",
+    -- b.b_ref AS "Booking Ref", -- NOT REQUIRED
+    -- c.c_name AS "Guest", -- NOT REQUIRED
     r.r_no AS "Room Number",
     CASE
         WHEN r.r_class = 'std_d' THEN 'Standard Double'
@@ -83,9 +83,9 @@ SELECT
         WHEN r.r_class = 'sup_t' THEN 'Superior Twin'
         ELSE 'Unknown'  -- In case of an unexpected value
     END AS "Room Type",
-    rb.checkin AS "Check-in",
+    -- rb.checkin AS "Check-in", -- NOT REQUIRED
     rb.checkout AS "Check-out",
-    rb.guests AS "Guests",
+    -- rb.guests AS "Guests", -- NOT REQUIRED
     r.r_status AS "Room Status",
     CASE 
         WHEN r.r_status = 'C' THEN 'Checked-out and ready to clean'
@@ -113,7 +113,7 @@ ORDER BY
 UPDATE hotelbooking.room
 SET r_status = 'X'  -- Cleaning in progress
 WHERE r_status = 'C'  -- Only rooms that are currently checked-out
-AND r_no IN (101,102,103);  -- (Add room numbers as required)
+AND r_no IN ();  -- (Add room numbers as required)
 
 -- UPDATE ROOM TO CLEANING FINISHED AND AVAILABLE FOR NEW GUEST
 UPDATE hotelbooking.room
@@ -125,12 +125,12 @@ AND r_no IN ();  -- (Add room numbers as required)
 UPDATE hotelbooking.room
 SET r_status = 'C'  -- Checked-out and ready for cleaning
 WHERE r_status = 'O'  -- Only rooms that are currently occupied
-AND r_no IN (106,107,108);  -- (Add room numbers as required)
+AND r_no IN ();  -- (Add room numbers as required)
 
 -- UPDATE ROOM TO OCCUPIED CHECKED-IN
 UPDATE hotelbooking.room
 SET r_status = 'O'  -- Checked-in and occupied
 WHERE r_status = 'A'  -- Only rooms that are ready for next guest
-AND r_no IN (205, 206, 207, 209);  -- (Add room numbers as required)
+AND r_no IN ();  -- (Add room numbers as required)
 
 
