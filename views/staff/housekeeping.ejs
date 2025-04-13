@@ -1,9 +1,45 @@
-<%- include('../partials/header', { title: 'Reports' }) %>
+<%- include('../partials/header', { title: 'Housekeeping Dashboard' }) %>
 <%- include('../partials/navbar') %>
 
 <main class="container my-4 flex-grow-1">
   <h2 class="mb-4">Housekeeping Dashboard</h2>
   <p class="lead">Today's room cleaning tasks will appear here.</p>  
+
+  <button id="refreshButton" class="btn btn-sm btn-primary mb-3" style="width: auto; display: inline-block;">🔄 Refresh</button>
+
+
+  <!-- Responsive table for booking records -->
+  <div class="table-responsive">
+    <table class="table table-striped display nowrap" id="bookingTable" style="width:100%">
+      <thead class="table-dark">
+        <tr>
+          <th>Room No</th>
+          <th>Room Type</th>
+          <th>Check-out</th>
+          <th>Room Status</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Populated by JS using the Database -->
+      </tbody>
+    </table>
+  </div>
 </main>
+
+<!-- jQuery and DataTables (for sorting, searching, pagination) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Responsive CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
+<!-- DataTables Responsive JS -->
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+
+<!-- Custom JS for Reception dashboard functionality -->
+<script src="/staff/js/housekeeping.js"></script>
 
 <%- include('../partials/footer') %>
