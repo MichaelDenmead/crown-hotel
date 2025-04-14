@@ -1,18 +1,15 @@
-// Run this when the page is fully loaded
 document.addEventListener('DOMContentLoaded', async () => {
-  // Initialize DataTable on the bookings table
   const table = $('#bookingTable').DataTable();
   const tableBody = document.querySelector('#bookingTable tbody');
 
   try {
-    // Fetch all bookings from the backend
     const res = await fetch('/api/bookings');
     const bookings = await res.json();
     console.log("📦 Bookings received:", bookings);
+    window.bookings = bookings;
 
-    // Add each booking as a new row in the table
     bookings.forEach(b => {
-      table.row.add([
+      const newRow = table.row.add([
         b.b_ref ?? 'N/A',
         b.c_name ?? 'N/A',
         b.r_no ?? 'N/A',
@@ -21,21 +18,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         b.check_out ?? 'N/A',
         b.nights ?? 'N/A',
         b.guests ?? 'N/A',
-        // Buttons for actions
-        `<button class="btn btn-sm btn-success" onclick="checkIn('${b.b_ref}')">Check-In</button>
-         <button class="btn btn-sm btn-danger" onclick="cancelBooking('${b.b_ref}')">Cancel</button>`
-      ]);
+        `<button class="btn btn-sm btn-success" onclick="event.stopPropagation(); checkIn('${b.b_ref}')">Check-In</button>
+         <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); cancelBooking('${b.b_ref}')">Cancel</button>`
+      ]).draw().node();
+
+      // Add class and ID for clickability
+      newRow.classList.add('clickable-row');
+      $(newRow).attr('data-id', b.b_ref);
     });
 
-    table.draw(); // Redraw table to show new data
+    // ✅ Use event delegation for dynamically added rows
+    $('#bookingTable tbody').on('click', 'tr.clickable-row', function (e) {
+      if (!$(e.target).is('button')) {
+        const bookingRef = $(this).data('id');
+        if (bookingRef) {
+          window.location.href = `/staff/reception/booking/${bookingRef}`;
+        }
+      }
+    });
+
   } catch (err) {
     console.error("❌ Failed to load bookings:", err);
-    // Show error in table if loading fails
     tableBody.innerHTML = '<tr><td colspan="9">Error loading bookings</td></tr>';
   }
 });
 
-// Cancel a booking by reference
 async function cancelBooking(b_ref) {
   if (!confirm('Are you sure you want to cancel this booking?')) return;
 
@@ -44,7 +51,7 @@ async function cancelBooking(b_ref) {
     const result = await res.json();
     if (res.ok) {
       alert('Booking cancelled.');
-      location.reload(); // Refresh the page to update the table
+      location.reload();
     } else {
       alert(result.message || 'Cancellation failed.');
     }
@@ -53,7 +60,6 @@ async function cancelBooking(b_ref) {
   }
 }
 
-// Placeholder for future check-in logic
 function checkIn(b_ref) {
   alert(`Check-in logic not yet implemented for booking: ${b_ref}`);
 }

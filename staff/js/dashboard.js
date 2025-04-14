@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const roleSelect = document.getElementById("role-select");
     const contentDiv = document.getElementById("dashboard-content");
 
+    // Only run this script if these elements exist (i.e. on the dashboard page)
+    if (!roleSelect || !contentDiv) return;
+
     // Function to update content based on role
     function updateDashboard(role) {
         if (role === "receptionist") {
