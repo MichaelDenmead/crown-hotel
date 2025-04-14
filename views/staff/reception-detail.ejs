@@ -16,14 +16,15 @@
   <form method="POST" action="/staff/reception/booking/<%= booking.b_ref %>/update">
     <!-- Customer Details -->
     <h4>Customer Details</h4>
-    <div class="mb-3">
-      <label class="form-label">Name</label>
-      <input type="text" class="form-control" name="c_name" value="<%= booking.c_name %>" required>
-    </div>
-  
-    <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input type="email" class="form-control" name="c_email" value="<%= booking.c_email %>" required>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" name="c_name" value="<%= booking.c_name %>" required>
+      </div>  
+      <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="c_email" value="<%= booking.c_email %>" required>
+      </div>
     </div>
   
     <div class="mb-3">
@@ -31,60 +32,68 @@
       <input type="text" class="form-control" name="c_address" value="<%= booking.c_address || '' %>" required>
     </div>
   
-    <div class="mb-3">
-      <label class="form-label">Card Type</label>
-      <select class="form-control" name="c_cardtype" required>
-        <option value="V" <%= booking.c_cardtype === 'V' ? 'selected' : '' %>>Visa</option>
-        <option value="MC" <%= booking.c_cardtype === 'MC' ? 'selected' : '' %>>MasterCard</option>
-        <option value="A" <%= booking.c_cardtype === 'A' ? 'selected' : '' %>>Amex</option>
-      </select>
-    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Card Type</label>
+        <select class="form-control" name="c_cardtype" required>
+          <option value="V" <%= booking.c_cardtype === 'V' ? 'selected' : '' %>>Visa</option>
+          <option value="MC" <%= booking.c_cardtype === 'MC' ? 'selected' : '' %>>MasterCard</option>
+          <option value="A" <%= booking.c_cardtype === 'A' ? 'selected' : '' %>>Amex</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Card Expiry (MM/YY)</label>
+        <input type="text" class="form-control" name="c_cardexp" value="<%= booking.c_cardexp %>" required>
+      </div>
+    </div> 
   
-    <div class="mb-3">
-      <label class="form-label">Card Expiry (MM/YY)</label>
-      <input type="text" class="form-control" name="c_cardexp" value="<%= booking.c_cardexp %>" required>
-    </div>
-  
-    <div class="mb-3">
-      <label class="form-label">Card Number</label>
-      <input type="text" class="form-control" name="c_cardno" value="<%= booking.c_cardno %>" required>
-    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Card Number</label>
+        <input type="text" class="form-control" name="c_cardno" value="<%= booking.c_cardno %>" required>
+      </div>
+    </div>  
   
     <!-- Booking Details -->
     <h4 class="mt-4">Booking Details</h4>
   
-    <div class="mb-3">
-      <label class="form-label">Room Number</label>
-      <input type="number" class="form-control" name="room" value="<%= booking.r_no %>" required>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Room Number</label>
+        <input type="number" class="form-control" name="room" value="<%= booking.r_no %>" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Room Type</label>
+        <input type="text" class="form-control" value="<%= booking.r_class %>" readonly>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Check-In Date</label>
+        <input type="date" class="form-control" name="checkin" id="checkin" value="<%= booking.check_in %>" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Check-Out Date</label>
+        <input type="date" class="form-control" name="checkout" id="checkout" value="<%= booking.check_out %>" required>
+      </div>
     </div>
   
-    <div class="mb-3">
-      <label class="form-label">Room Type</label>
-      <input type="text" class="form-control" value="<%= booking.r_class %>" readonly>
-    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Number of Nights</label>
+        <input type="number" class="form-control" id="nights" value="<%= booking.nights %>" readonly>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Number of Guests</label>
+        <input type="number" class="form-control" name="guests" value="<%= booking.guests %>" required>
+      </div>
+    </div>  
   
-    <div class="mb-3">
-      <label class="form-label">Check-In Date</label>
-      <input type="date" class="form-control" name="checkin" id="checkin" value="<%= booking.check_in %>" required>
+    <div class="d-flex justify-content-between mt-4">
+      <button type="submit" class="btn btn-primary me-2 px-4 py-2">Save Changes</button>
+      <a href="/staff/reception" class="btn btn-secondary ms-2 px-4 py-2">Back</a>
     </div>
-  
-    <div class="mb-3">
-      <label class="form-label">Check-Out Date</label>
-      <input type="date" class="form-control" name="checkout" id="checkout" value="<%= booking.check_out %>" required>
-    </div>
-  
-    <div class="mb-3">
-      <label class="form-label">Number of Nights</label>
-      <input type="number" class="form-control" id="nights" value="<%= booking.nights %>" readonly>
-    </div>
-  
-    <div class="mb-3">
-      <label class="form-label">Number of Guests</label>
-      <input type="number" class="form-control" name="guests" value="<%= booking.guests %>" required>
-    </div>
-  
-    <button type="submit" class="btn btn-primary">Save Changes</button>
-    <a href="/staff/reception" class="btn btn-secondary ms-2">Back</a>
   </form>
 </main>
 
@@ -107,3 +116,4 @@
 </script>
 
 <%- include('../partials/footer') %>
+

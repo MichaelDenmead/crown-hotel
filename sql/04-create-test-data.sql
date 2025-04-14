@@ -120,8 +120,8 @@ END $$;
 -- TO UPDATE THE DATES ONCE IN THE DATABASE (CHANGE AS REQUIRED)
 -- Update the check-in and check-out dates for all test bookings
 UPDATE hotelbooking.roombooking
-SET checkin = '2025-05-11',  -- New check-in date
-    checkout = '2025-05-14'  -- New check-out date
+SET checkin = '2025-04-11',  -- New check-in date
+    checkout = '2025-04-14'  -- New check-out date
 WHERE b_ref IN ( 
     SELECT b_ref 
     FROM hotelbooking.booking 
