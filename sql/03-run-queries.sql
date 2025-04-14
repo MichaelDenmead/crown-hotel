@@ -133,4 +133,29 @@ SET r_status = 'O'  -- Checked-in and occupied
 WHERE r_status = 'A'  -- Only rooms that are ready for next guest
 AND r_no IN ();  -- (Add room numbers as required)
 
+--KK TEMP ADD REMOVE WHEN FINISHED
+SELECT b.b_ref, c.c_name, c.c_email, r.r_no, r.r_class,
+                   TO_CHAR(rb.checkin, 'YYYY-MM-DD') AS check_in,
+                   TO_CHAR(rb.checkout, 'YYYY-MM-DD') AS check_out,
+                   rb.checkout - rb.checkin AS nights, rb.guests,
+                   b.b_cost, b.b_outstanding
+            FROM hotelbooking.booking b
+            JOIN hotelbooking.customer c ON b.c_no = c.c_no
+            JOIN hotelbooking.roombooking rb ON b.b_ref = rb.b_ref
+            JOIN hotelbooking.room r ON rb.r_no = r.r_no
+            ORDER BY rb.checkin DESC
 
+-- BOOKING CALENDAR - CHECK FOR FULLY BOOKED DATES
+WITH booked_dates AS ( --
+    SELECT generate_series(checkin, checkout - INTERVAL '1 day', INTERVAL '1 day') AS day
+    FROM hotelbooking.roombooking
+),
+room_counts AS (
+    SELECT day::date, COUNT(*) AS booked_rooms
+    FROM booked_dates
+    GROUP BY day
+)
+SELECT day
+FROM room_counts
+WHERE booked_rooms >= 32
+ORDER BY day;
