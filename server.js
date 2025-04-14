@@ -65,19 +65,20 @@ app.get('/booking', async (req, res) => {
     }
 });
 
-// API - Get All Bookings
+// [RECEPTION DASHBOARD] Get All Bookings for Reception Dashboard
 app.get('/api/bookings', async (req, res) => {
     try {
         const result = await pool.query(`
             SELECT b.b_ref, c.c_name, c.c_email, r.r_no, r.r_class,
                    TO_CHAR(rb.checkin, 'YYYY-MM-DD') AS check_in,
                    TO_CHAR(rb.checkout, 'YYYY-MM-DD') AS check_out,
-                   rb.checkout - rb.checkin AS nights, rb.guests
+                   rb.checkout - rb.checkin AS nights, rb.guests,
+                   b.b_cost, b.b_outstanding
             FROM hotelbooking.booking b
             JOIN hotelbooking.customer c ON b.c_no = c.c_no
             JOIN hotelbooking.roombooking rb ON b.b_ref = rb.b_ref
             JOIN hotelbooking.room r ON rb.r_no = r.r_no
-            ORDER BY rb.checkin ASC
+            ORDER BY rb.checkin DESC
         `);
         res.json(result.rows);
     } catch (err) {
@@ -86,12 +87,65 @@ app.get('/api/bookings', async (req, res) => {
     }
 });
 
-// API - Get Single Booking for Detail Page
+// [RECEPTION DASHBOARD] Route for Reception CheckIn
+app.put('/api/booking/:b_ref/checkin', async (req, res) => {
+    const { b_ref } = req.params;
+  
+    try {
+      const roomResult = await pool.query(`
+        SELECT r_no FROM hotelbooking.roombooking WHERE b_ref = $1
+      `, [b_ref]);
+  
+      if (roomResult.rowCount === 0) return res.status(404).json({ message: 'Room not found' });
+  
+      const r_no = roomResult.rows[0].r_no;
+  
+      await pool.query(`
+        UPDATE hotelbooking.room SET r_status = 'O' WHERE r_no = $1
+      `, [r_no]);
+  
+      res.json({ message: 'Checked in' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Check-in failed' });
+    }
+  });
+
+// [RECEPTION DASHBOARD] Route for Reception CheckOut
+app.put('/api/booking/:b_ref/checkout', async (req, res) => {
+    const { b_ref } = req.params;
+  
+    try {
+      const roomResult = await pool.query(`
+        SELECT r_no FROM hotelbooking.roombooking WHERE b_ref = $1
+      `, [b_ref]);
+  
+      if (roomResult.rowCount === 0) return res.status(404).json({ message: 'Room not found' });
+  
+      const r_no = roomResult.rows[0].r_no;
+      // Update Room status to Checked-Out
+      await pool.query(`
+        UPDATE hotelbooking.room SET r_status = 'C' WHERE r_no = $1
+      `, [r_no]);
+      // Update Outstanding Balance to £0 as payments are taken on checkout
+      await pool.query(`
+        UPDATE hotelbooking.booking SET b_outstanding = 0 WHERE b_ref = $1
+      `, [b_ref]);
+  
+      res.json({ message: 'Checked out' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Check-out failed' });
+    }
+  });
+
+// [RECEPTION-DETAILS] Get Single Booking for Detail Page
 app.get('/staff/reception/booking/:id', async (req, res) => {
     const bookingId = req.params.id;
     try {
         const result = await pool.query(`
-            SELECT b.b_ref, c.c_name, c.c_email, r.r_no, r.r_class,
+            SELECT b.b_ref, c.c_name, c.c_email, c.c_address, c.c_cardtype, c.c_cardexp, c.c_cardno,
+                   r.r_no, r.r_class,
                    TO_CHAR(rb.checkin, 'YYYY-MM-DD') AS check_in,
                    TO_CHAR(rb.checkout, 'YYYY-MM-DD') AS check_out,
                    rb.checkout - rb.checkin AS nights, rb.guests
@@ -108,35 +162,65 @@ app.get('/staff/reception/booking/:id', async (req, res) => {
 
         res.render('staff/reception-detail', {
             booking,
-            staffUser: req.session.staffUser // ✅ fix: pass session user
-          });
-          
+            staffUser: req.session.staffUser,
+            req // ✅ Pass request to use query string in EJS
+        });
+
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');
     }
 });
 
-
-// API - Update Booking from Detail Page
+// [RECEPTION-DETAILS] Update Booking from Detail Page
 app.post('/staff/reception/booking/:id/update', async (req, res) => {
     const bookingId = req.params.id;
-    const updatedData = req.body;
-
+    const {
+      c_name, c_email, c_address, c_cardtype, c_cardexp, c_cardno,
+      room, checkin, checkout, guests
+    } = req.body;
+  
     try {
-        // Example update - replace with actual logic
-        await pool.query(`
-            UPDATE hotelbooking.roombooking
-            SET guests = $1
-            WHERE b_ref = $2
-        `, [updatedData.guests, bookingId]);
-
-        res.redirect('/staff/reception');
+      // First, get c_no using b_ref
+      const customerResult = await pool.query(`
+        SELECT c_no FROM hotelbooking.booking WHERE b_ref = $1
+      `, [bookingId]);
+  
+      if (customerResult.rowCount === 0) {
+        return res.redirect(`/staff/reception/booking/${bookingId}?error=1`);
+      }
+  
+      const c_no = customerResult.rows[0].c_no;
+  
+      // Update customer details
+      await pool.query(`
+        UPDATE hotelbooking.customer
+        SET c_name = $1,
+            c_email = $2,
+            c_address = $3,
+            c_cardtype = $4,
+            c_cardexp = $5,
+            c_cardno = $6
+        WHERE c_no = $7
+      `, [c_name, c_email, c_address, c_cardtype, c_cardexp, c_cardno, c_no]);
+  
+      // Update room booking details
+      await pool.query(`
+        UPDATE hotelbooking.roombooking
+        SET r_no = $1,
+            checkin = $2,
+            checkout = $3,
+            guests = $4
+        WHERE b_ref = $5
+      `, [room, checkin, checkout, guests, bookingId]);
+  
+      res.redirect(`/staff/reception/booking/${bookingId}?updated=1`);
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Failed to update booking');
+      console.error('❌ Failed to update booking & customer:', err);
+      res.redirect(`/staff/reception/booking/${bookingId}?error=1`);
     }
-});
+  });
+  
 
 // Login
 app.get('/login', (req, res) => res.render('login', { error: null }));
