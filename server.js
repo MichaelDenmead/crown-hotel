@@ -43,6 +43,13 @@ function requireRole(role) {
 // Public Routes
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));
 app.get('/rooms', (req, res) => res.sendFile(path.join(__dirname, 'public/rooms.html')));
+app.get('/facilities', (req, res) => res.sendFile(path.join(__dirname, 'public/facilities.html')));
+app.get('/restaurant', (req, res) => res.sendFile(path.join(__dirname, 'public/restaurant.html')));
+app.get('/bar', (req, res) => res.sendFile(path.join(__dirname, 'public/bar.html')));
+app.get('/gym', (req, res) => res.sendFile(path.join(__dirname, 'public/gym.html')));
+app.get('/conference', (req, res) => res.sendFile(path.join(__dirname, 'public/conference.html')));
+app.get('/outandabout', (req, res) => res.sendFile(path.join(__dirname, 'public/outandabout.html')));
+app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'public/contact.html')));
 // ... other public static routes
 
 // Staff Pages
